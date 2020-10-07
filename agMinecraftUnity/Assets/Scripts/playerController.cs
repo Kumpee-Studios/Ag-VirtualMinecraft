@@ -2,12 +2,19 @@
 using System.Collections.Generic;
 using System.Numerics;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 public class playerController : MonoBehaviour
 {
+    public GridLayout grid;
+    public Tilemap gridTilemap;
+    public TileBase hoedGround;
     public float moveSpeed = 5; //how fast player moves
     public Transform movePoint; //this is the point that the player will move towards
+    public GameObject hoePoint; //grabbing reference to 'hoe' spot player can use to till ground
     private bool isMoving = false;
+    private bool left = false;
+    private bool down = true;
     // Start is called before the first frame update
     void Start()
     {
@@ -22,27 +29,56 @@ public class playerController : MonoBehaviour
         {
             if (Input.GetKey(KeyCode.W))
             {
+                if(down) //work in progress, will probably just wind up using sprite anims...not sure. Will need spritesheet first
+                {
+                    down = !down;
+                    //this.gameObject.transform.rotation = UnityEngine.Quaternion.Euler(90, 0, 0);
+                    hoePoint.gameObject.transform.position = this.gameObject.transform.position + new UnityEngine.Vector3(0, 1, 0);
+                }
                 moveUp();
                 isMoving = true;
                 StartCoroutine(moveCooldown());
             }
             if (Input.GetKey(KeyCode.S))
             {
+                if (!down) //see work in progress comment above on (currently) line 32
+                {
+                    down = !down;
+                    //this.gameObject.transform.rotation = UnityEngine.Quaternion.Euler(-90, 0, 0);
+                    hoePoint.gameObject.transform.position = this.gameObject.transform.position + new UnityEngine.Vector3(0, -1, 0); //adjusts where they can hoe the ground
+               }
                 moveDown();
                 isMoving = true;
                 StartCoroutine(moveCooldown());
             }
             if (Input.GetKey(KeyCode.A))
             {
+                if (!left)
+                {
+                    left = !left; //the rotate brings the hoe point with it
+                    this.gameObject.transform.rotation = UnityEngine.Quaternion.Euler(0, 180, 0);
+                    hoePoint.gameObject.transform.position = this.gameObject.transform.position + new UnityEngine.Vector3(1, 0, 0); //since I'm rotating the sprite this just has to be 0
+
+                }
                 moveLeft();
                 isMoving = true;
                 StartCoroutine(moveCooldown());
             }
             if (Input.GetKey(KeyCode.D))
             {
+                if (left)
+                {
+                    left = !left;
+                    this.gameObject.transform.rotation = UnityEngine.Quaternion.Euler(0, 0, 0);
+                    hoePoint.gameObject.transform.position = this.gameObject.transform.position + new UnityEngine.Vector3(1, 0, 0); //since I'm rotating the sprite this just has to be 0
+                }
                 moveRight();
                 isMoving = true;
                 StartCoroutine(moveCooldown());
+            }
+            if (Input.GetKey(KeyCode.Space))
+            {
+                hoeGround();
             }
         }
     }
@@ -71,4 +107,15 @@ public class playerController : MonoBehaviour
         }
         isMoving = false;
     }
+    private void hoeGround()
+    {
+        //implement tile changing code here
+        Vector3Int hoeTile = grid.WorldToCell(hoePoint.transform.position); //figuring out the x,y,z coordinate the of tile to hoe
+        Debug.Log(hoeTile); //printing it for sanity's sake
+        gridTilemap.SetTile(hoeTile, hoedGround); //so, SetTile must have capital S and T, spent a while figuring that out
+        //outside of that you need a reference to the tilemap not just the grid even though grid inherits FROM tilemap
+        //after that just feed the SetTile the tile in question you want to instantiate (using a seperate layer with colliders)
+        //and where to instantiate it. I wrote that backwards, location, tile to create. 
+    }
+
 }
