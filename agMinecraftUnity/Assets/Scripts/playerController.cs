@@ -33,7 +33,7 @@ public class playerController : MonoBehaviour
                 {
                     down = !down;
                     //this.gameObject.transform.rotation = UnityEngine.Quaternion.Euler(90, 0, 0);
-                    hoePoint.gameObject.transform.position = this.gameObject.transform.position + new UnityEngine.Vector3(0, 1, 0);
+                    hoePoint.gameObject.transform.position = this.gameObject.transform.position + new UnityEngine.Vector3(0, 1.5f, 0);
                 }
                 moveUp();
                 isMoving = true;
@@ -45,7 +45,7 @@ public class playerController : MonoBehaviour
                 {
                     down = !down;
                     //this.gameObject.transform.rotation = UnityEngine.Quaternion.Euler(-90, 0, 0);
-                    hoePoint.gameObject.transform.position = this.gameObject.transform.position + new UnityEngine.Vector3(0, -1, 0); //adjusts where they can hoe the ground
+                    hoePoint.gameObject.transform.position = this.gameObject.transform.position + new UnityEngine.Vector3(0, -1.5f, 0); //adjusts where they can hoe the ground
                }
                 moveDown();
                 isMoving = true;
@@ -57,7 +57,7 @@ public class playerController : MonoBehaviour
                 {
                     left = !left; //the rotate brings the hoe point with it
                     this.gameObject.transform.rotation = UnityEngine.Quaternion.Euler(0, 180, 0);
-                    hoePoint.gameObject.transform.position = this.gameObject.transform.position + new UnityEngine.Vector3(1, 0, 0); //since I'm rotating the sprite this just has to be 0
+                    hoePoint.gameObject.transform.position = this.gameObject.transform.position + new UnityEngine.Vector3(-1.5f, 0, 0); //since I'm rotating the sprite this just has to be 0
 
                 }
                 moveLeft();
@@ -70,7 +70,7 @@ public class playerController : MonoBehaviour
                 {
                     left = !left;
                     this.gameObject.transform.rotation = UnityEngine.Quaternion.Euler(0, 0, 0);
-                    hoePoint.gameObject.transform.position = this.gameObject.transform.position + new UnityEngine.Vector3(1, 0, 0); //since I'm rotating the sprite this just has to be 0
+                    hoePoint.gameObject.transform.position = this.gameObject.transform.position + new UnityEngine.Vector3(1.5f, 0, 0); //since I'm rotating the sprite this just has to be 0
                 }
                 moveRight();
                 isMoving = true;
