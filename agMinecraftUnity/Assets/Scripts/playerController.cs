@@ -13,10 +13,11 @@ public class playerController : MonoBehaviour
     public Transform movePoint; //this is the point that the player will move towards
     public GameObject hoePoint; //grabbing reference to 'hoe' spot player can use to till ground
     public timerBarController controller;
+    public bool canHoe = true; //this will be accessed from the interactionController to adjust what action is taken when space is pressed, will require mulitple bools
     private bool isMoving = false;
     private bool left = false;
     private bool down = true;
-    private bool canDoStuff = true;
+    public bool canDoStuff = true; //true for the interaction controller
     // Start is called before the first frame update
     void Start()
     {
@@ -80,9 +81,12 @@ public class playerController : MonoBehaviour
                     isMoving = true;
                     StartCoroutine(moveCooldown());
                 }
-                if (Input.GetKey(KeyCode.Space))
-                {
-                    hoeGround();
+                if (Input.GetKey(KeyCode.Space)) //need a way ot check if they're trying to hoe the fence
+                { //this will be generic controller so other if statements will go inside instead of one multi-condition if
+                    if (canHoe)
+                    {
+                        hoeGround();
+                    }
                 }
             }
         }
