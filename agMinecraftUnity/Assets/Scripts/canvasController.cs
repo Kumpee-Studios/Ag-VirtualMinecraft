@@ -7,7 +7,6 @@ public class canvasController : MonoBehaviour
     public GameObject pauseCanvas;
     public GameObject seedsCanvas;
     public GameObject produceCanvas;
-    public GameObject fertilizerCanvas;
     // Start is called before the first frame update
     void Start()
     {
@@ -32,7 +31,6 @@ public class canvasController : MonoBehaviour
         {
             seedsCanvas.SetActive(true); //making sure there's only one overlay on screen on a time to avoid clutter
             produceCanvas.SetActive(false);
-            fertilizerCanvas.SetActive(false);
         } else
         {
             hideSeeds();
@@ -44,22 +42,9 @@ public class canvasController : MonoBehaviour
         {
             produceCanvas.SetActive(true);
             seedsCanvas.SetActive(false);
-            fertilizerCanvas.SetActive(false);
         } else
         {
             hideProduce();
-        }
-    }
-    public void showFertilizer()
-    {
-        if (fertilizerCanvas.activeSelf == false)
-        {
-            fertilizerCanvas.SetActive(true);
-            produceCanvas.SetActive(false);
-            seedsCanvas.SetActive(false);
-        } else
-        {
-            hideFertilizer();
         }
     }
     public void hideSeeds() //splitting these methods up so that I can use them here and call them whenever an item is selected from one of these menus
@@ -68,10 +53,7 @@ public class canvasController : MonoBehaviour
     }
     public void hideProduce()
     {
-        seedsCanvas.SetActive(false);
+        produceCanvas.SetActive(false);
     }
-    public void hideFertilizer()
-    {
-        seedsCanvas.SetActive(false);
-    }
+
 }

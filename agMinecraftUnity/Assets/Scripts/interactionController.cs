@@ -6,8 +6,10 @@ using UnityEngine.UI;
 public class interactionController : MonoBehaviour
 {
     public playerController playercontroller;
+    public playerInventory PlayerInventory;
     public GameObject interactButton;
     private bool dirt = false;
+    private dirtController adjustBool;
     // Start is called before the first frame update
     void Start()
     {
@@ -26,8 +28,9 @@ public class interactionController : MonoBehaviour
         {
             playercontroller.canHoe = false;
         }
-     else if(collision.gameObject.tag == "Dirt" && playercontroller.canDoStuff == true)
+     else if(collision.gameObject.tag == "Dirt" && playercontroller.canDoStuff == true && collision.gameObject.GetComponent<dirtController>().canInteract)
         {
+            adjustBool = collision.gameObject.GetComponent<dirtController>(); //storing reference to object here so that I can adjust boolean later in code
             interactButton.SetActive(true);
             dirt = true;
         }   
@@ -42,8 +45,9 @@ public class interactionController : MonoBehaviour
     {
         if (dirt)
         {
-            playercontroller.StartCoroutine("plantCarrot");
+            PlayerInventory.StartCoroutine("plantCarrot");
             dirt = false;//should put a boolean in the dirt controller script to check if it has been planted on already
+            adjustBool.canInteract = false;
         } else if(playercontroller.canHoe)
         {
             playercontroller.hoeGround();

@@ -1,0 +1,60 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class playerInventory : MonoBehaviour
+{
+    public playerController PlayerController;
+    //need 6 ints to hold number of each seed, array might be better
+    public int[] seedArray = new int[6];
+    //5 more needed
+    public int[] produceArray = new int[6];
+    [Tooltip("Alphabetical order, bean, carrot, corn, soybean, squash, sugarbeet. Please don't change unless you like making a hard time for yourself.")]
+    public GameObject[] plantArray = new GameObject[6]; //in order of prefabs alphabetically: bean, carrot, corn, soybean, squash, sugarbeet
+    // Start is called before the first frame update
+    void Start()
+    {
+        //remove this later, I need to be able to plant seeds right now
+        foreach(int number in seedArray)
+        {
+            seedArray[number] = 5; //just trying to set all values of seeds to 5 to make sure I test each one
+        }
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        
+    }
+    public IEnumerator plantCarrot() //this might move to some sort of plant controller/inventory controller script, we'll see though
+    {//called from interaction controller
+        PlayerController.canDoStuff = false;
+        StartCoroutine(PlayerController.moveAgain(2.5f));
+        PlayerController.controller.startTimer(2.5f, "Planting carrot");
+        yield return new WaitForSeconds(2.5f);
+        Vector3Int hoeTile = PlayerController.grid.WorldToCell(PlayerController.hoePoint.transform.position); //figuring out the x,y,z coordinate the of tile to hoe
+        Instantiate(plantArray[2], (StringVector(hoeTile.ToString()) + new UnityEngine.Vector3(0.5f, 0.5f, 0f)), UnityEngine.Quaternion.Euler(0, 0, 0)); //changing name to carrotTile
+    }
+    public IEnumerator plantPlant(int plant)
+    { //creating the generic version of plantCarrot that will simply take in an integer value and instatiate the desired prefab
+        PlayerController.canDoStuff = false;
+        StartCoroutine(PlayerController.moveAgain(2.5f));
+        PlayerController.controller.startTimer(2.5f, "Planting carrot");
+        yield return new WaitForSeconds(2.5f);
+        Vector3Int hoeTile = PlayerController.grid.WorldToCell(PlayerController.hoePoint.transform.position); //figuring out the x,y,z coordinate the of tile to hoe
+        Instantiate(plantArray[plant], (StringVector(hoeTile.ToString()) + new UnityEngine.Vector3(0.5f, 0.5f, 0f)), UnityEngine.Quaternion.Euler(0, 0, 0)); //changing name to carrotTile
+        seedArray[plant] -= 1;
+    }
+    public IEnumerator harvestPlant(int plant)
+    {
+        yield return new WaitForSeconds(2.5f); //need to figure out how to call some sort of destroy method from the plant controller
+        seedArray[plant] += Random.Range(0, 1);
+        produceArray[plant] += Random.Range(2, 5); //giving them produce and seeds for harvesting
+    }
+    public UnityEngine.Vector3 StringVector(string breakIt) //currently not in use but a handy method if you need to convert a vector3Int to a vector3 since there is no implicit conversion
+    {
+        string[] numbers = breakIt.Split(','); //REMEMBER THE SECOND PARAMETER OF SUBSTRING IS THE STRING LENGTH NOT ENDING INDEX
+        UnityEngine.Vector3 result = new UnityEngine.Vector3(float.Parse(numbers[0].Substring(1, numbers[0].Length - 1)), float.Parse(numbers[1]), float.Parse(numbers[2].Substring(0, numbers[2].Length - 1)));
+        return result;
+    }
+}

@@ -57,6 +57,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\timerBarController.cs" />
+    <Compile Include="Assets\Scripts\carrotController.cs" />
+    <Compile Include="Assets\Scripts\playerInventory.cs" />
     <Compile Include="Assets\Scripts\dirtController.cs" />
     <Compile Include="Assets\Scripts\followPlayer.cs" />
     <Compile Include="Assets\Scripts\interactionController.cs" />
@@ -65,7 +67,7 @@
     <Compile Include="Assets\Scripts\menuManager.cs" />
     <Compile Include="Assets\Scripts\teleportPlayer.cs" />
     <Compile Include="Assets\Scripts\canvasController.cs" />
-    <Compile Include="Assets\Scripts\carrotController.cs" />
+    <Compile Include="Assets\Scripts\bigFarmCanvasManager.cs" />
   </ItemGroup>
   <ItemGroup>
      <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

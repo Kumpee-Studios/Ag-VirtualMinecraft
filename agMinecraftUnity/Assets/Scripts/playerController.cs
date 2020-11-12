@@ -19,10 +19,8 @@ public class playerController : MonoBehaviour
     private bool left = false;
     private bool down = true;
     public bool canDoStuff = true; //true for the interaction controller
-    public GameObject carrotFab; //might be easier to make an array later, food for thought
     private Transform transform2; //need this to track the transform of the tile to create the carrot on
     [SerializeField] interactionController interaction; //keeps it private while still showing in inspector
-    [SerializeField] GameObject seedpoint;
     // Start is called before the first frame update
     void Start()
     {
@@ -135,27 +133,10 @@ public class playerController : MonoBehaviour
         //after that just feed the SetTile the tile in question you want to instantiate (using a seperate layer with colliders)
         //and where to instantiate it. I wrote that backwards, location, tile to create. 
     }
-    public IEnumerator plantCarrot() //this might move to some sort of plant controller/inventory controller script, we'll see though
-    {//called from interaction controller
-        seedpoint.transform.position = hoePoint.transform.position;
-        canDoStuff = false;
-        StartCoroutine(moveAgain(2.5f));
-        controller.startTimer(2.5f, "Planting carrot");
-        yield return new WaitForSeconds(2.5f);
-        Vector3Int hoeTile = grid.WorldToCell(hoePoint.transform.position); //figuring out the x,y,z coordinate the of tile to hoe
-        seedpoint.transform.position = StringVector(hoeTile.ToString()); //don't need this, remove next coding session
-        Instantiate(carrotFab, (StringVector(hoeTile.ToString()) + new UnityEngine.Vector3(0.5f, 0.5f, 0f)), UnityEngine.Quaternion.Euler(0, 0, 0)); //changing name to carrotTile
-    }
 
     public IEnumerator moveAgain(float delay)
     {
         yield return new WaitForSeconds(delay);
         canDoStuff = true;
-    }
-    public UnityEngine.Vector3 StringVector(string breakIt) //currently not in use but a handy method if you need to convert a vector3Int to a vector3 since there is no implicit conversion
-    {
-        string[] numbers = breakIt.Split(','); //REMEMBER THE SECOND PARAMETER OF SUBSTRING IS THE STRING LENGTH NOT ENDING INDEX
-        UnityEngine.Vector3 result = new UnityEngine.Vector3(float.Parse(numbers[0].Substring(1, numbers[0].Length - 1)), float.Parse(numbers[1]), float.Parse(numbers[2].Substring(0, numbers[2].Length - 1)));
-        return result;
     }
 }
