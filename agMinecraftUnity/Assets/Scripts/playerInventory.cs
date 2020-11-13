@@ -1,14 +1,17 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class playerInventory : MonoBehaviour
 {
     public playerController PlayerController;
     //need 6 ints to hold number of each seed, array might be better
-    public int[] seedArray = new int[6];
+    public int[] seedArray = new int[6]; //values of number of seeds they have and text to display them in inventory
+    public TextMeshProUGUI[] seedText = new TextMeshProUGUI[6];
     //5 more needed
-    public int[] produceArray = new int[6];
+    public int[] produceArray = new int[6]; //values of how much harvested produce they have and the text that needs to be updated
+    public TextMeshProUGUI[] produceText = new TextMeshProUGUI[6];
     [Tooltip("Alphabetical order, bean, carrot, corn, soybean, squash, sugarbeet. Please don't change unless you like making a hard time for yourself.")]
     public GameObject[] plantArray = new GameObject[6]; //in order of prefabs alphabetically: bean, carrot, corn, soybean, squash, sugarbeet
     // Start is called before the first frame update
@@ -35,17 +38,29 @@ public class playerInventory : MonoBehaviour
         Vector3Int hoeTile = PlayerController.grid.WorldToCell(PlayerController.hoePoint.transform.position); //figuring out the x,y,z coordinate the of tile to hoe
         Instantiate(plantArray[2], (StringVector(hoeTile.ToString()) + new UnityEngine.Vector3(0.5f, 0.5f, 0f)), UnityEngine.Quaternion.Euler(0, 0, 0)); //changing name to carrotTile
     }
+    public void plantMethod(int plant) //same as harvestMethod
+    {
+        StartCoroutine(plantPlant(plant));
+    }
     public IEnumerator plantPlant(int plant)
     { //creating the generic version of plantCarrot that will simply take in an integer value and instatiate the desired prefab
-        PlayerController.canDoStuff = false;
-        StartCoroutine(PlayerController.moveAgain(2.5f));
-        PlayerController.controller.startTimer(2.5f, "Planting carrot");
-        yield return new WaitForSeconds(2.5f);
-        Vector3Int hoeTile = PlayerController.grid.WorldToCell(PlayerController.hoePoint.transform.position); //figuring out the x,y,z coordinate the of tile to hoe
-        Instantiate(plantArray[plant], (StringVector(hoeTile.ToString()) + new UnityEngine.Vector3(0.5f, 0.5f, 0f)), UnityEngine.Quaternion.Euler(0, 0, 0)); //changing name to carrotTile
-        seedArray[plant] -= 1;
+        if (seedArray[plant] > 0)
+        {
+            PlayerController.canDoStuff = false;
+            StartCoroutine(PlayerController.moveAgain(2.5f));
+            PlayerController.controller.startTimer(2.5f, "Planting seed");
+            yield return new WaitForSeconds(2.5f);
+            Vector3Int hoeTile = PlayerController.grid.WorldToCell(PlayerController.hoePoint.transform.position); //figuring out the x,y,z coordinate the of tile to hoe
+            Instantiate(plantArray[plant], (StringVector(hoeTile.ToString()) + new UnityEngine.Vector3(0.5f, 0.5f, 0f)), UnityEngine.Quaternion.Euler(0, 0, 0)); //changing name to carrotTile
+            seedArray[plant] -= 1; //deleting the numbers from end of string using TrimEnd to remove number and then concatenating the new number of seeds left
+            seedText[plant].text = seedText[plant].text.TrimEnd(new[]{'0', '1', '2', '3', '4', '5', '6', '7', '8', '9' }) + seedArray[plant];
+        }
     }
-    public IEnumerator harvestPlant(int plant)
+    public void harvestMethod(int plant) //need to make a method that can be called from button click, coroutines cannot be called from editor
+    {
+        StartCoroutine(HarvestPlant(plant));
+    }
+    public IEnumerator HarvestPlant(int plant)
     {
         yield return new WaitForSeconds(2.5f); //need to figure out how to call some sort of destroy method from the plant controller
         seedArray[plant] += Random.Range(0, 1);

@@ -1943,7 +1943,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 428989528}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1941773091}
+        m_TargetAssemblyTypeName: playerInventory, Assembly-CSharp
+        m_MethodName: plantMethod
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 3
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &428989528
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3411,7 +3423,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 748779218}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1941773091}
+        m_TargetAssemblyTypeName: playerInventory, Assembly-CSharp
+        m_MethodName: plantMethod
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 4
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &748779218
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3892,7 +3916,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 812356412}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1941773091}
+        m_TargetAssemblyTypeName: playerInventory, Assembly-CSharp
+        m_MethodName: plantMethod
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &812356412
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5037,7 +5073,6 @@ MonoBehaviour:
   pauseCanvas: {fileID: 15000497}
   seedsCanvas: {fileID: 485475630}
   produceCanvas: {fileID: 1426838148}
-  fertilizerCanvas: {fileID: 0}
 --- !u!1 &1152893439
 GameObject:
   m_ObjectHideFlags: 0
@@ -6658,7 +6693,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1501830603}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1941773091}
+        m_TargetAssemblyTypeName: playerInventory, Assembly-CSharp
+        m_MethodName: plantMethod
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 2
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1501830603
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6913,7 +6960,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1607555980}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1941773091}
+        m_TargetAssemblyTypeName: playerInventory, Assembly-CSharp
+        m_MethodName: plantMethod
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 5
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1607555980
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7583,7 +7642,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1799346213}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1941773091}
+        m_TargetAssemblyTypeName: playerInventory, Assembly-CSharp
+        m_MethodName: plantMethod
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 1
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1799346213
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7953,11 +8024,11 @@ RectTransform:
   m_Father: {fileID: 1607555978}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_AnchorMin: {x: 0.5, y: 0}
+  m_AnchorMax: {x: 0.5, y: 0}
+  m_AnchoredPosition: {x: 0, y: -40}
+  m_SizeDelta: {x: 200, y: 40}
+  m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &1881232659
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8504,7 +8575,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PlayerController: {fileID: 1941773085}
   seedArray: 000000000000000000000000000000000000000000000000
+  seedText:
+  - {fileID: 2088224702}
+  - {fileID: 186982339}
+  - {fileID: 1608919095}
+  - {fileID: 1048868940}
+  - {fileID: 966057055}
+  - {fileID: 1881232659}
   produceArray: 000000000000000000000000000000000000000000000000
+  produceText:
+  - {fileID: 1938126337}
+  - {fileID: 1341015060}
+  - {fileID: 1550551930}
+  - {fileID: 1861800029}
+  - {fileID: 726966180}
+  - {fileID: 1620165652}
   plantArray:
   - {fileID: 9005324670810561973, guid: 1c42427879d80ca4eb0375885792fa9e, type: 3}
   - {fileID: 2006494559485001742, guid: 9c339cfa1267791438858eb6c9de31a5, type: 3}
