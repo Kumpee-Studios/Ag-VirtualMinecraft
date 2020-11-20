@@ -8,6 +8,7 @@ public class interactionController : MonoBehaviour
     public playerController playercontroller;
     public playerInventory PlayerInventory;
     public GameObject interactButton;
+    public GameObject seedCanvas;
     private bool dirt = false;
     private dirtController adjustBool;
     // Start is called before the first frame update
@@ -43,11 +44,14 @@ public class interactionController : MonoBehaviour
     }
     public void handleInteraction()
     {
-        if (dirt)
+        if (dirt && playercontroller.canDoStuff && !playercontroller.seedMenu)
         {
-            PlayerInventory.StartCoroutine("plantCarrot");
+            //PlayerInventory.StartCoroutine("plantCarrot"); handled from buttons in seedCanvas
             dirt = false;//should put a boolean in the dirt controller script to check if it has been planted on already
-            adjustBool.canInteract = false;
+            //adjustBool.canInteract = false;
+            playercontroller.canDoStuff = false;
+            playercontroller.seedMenu = true;
+            seedCanvas.SetActive(true);
         } else if(playercontroller.canHoe)
         {
             playercontroller.hoeGround();

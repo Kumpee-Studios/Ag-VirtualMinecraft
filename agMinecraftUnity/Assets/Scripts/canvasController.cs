@@ -7,6 +7,7 @@ public class canvasController : MonoBehaviour
     public GameObject pauseCanvas;
     public GameObject seedsCanvas;
     public GameObject produceCanvas;
+    public playerController playercontroller;
     // Start is called before the first frame update
     void Start()
     {
@@ -49,6 +50,8 @@ public class canvasController : MonoBehaviour
     }
     public void hideSeeds() //splitting these methods up so that I can use them here and call them whenever an item is selected from one of these menus
     {
+        playercontroller.seedMenu = false;
+        playercontroller.canDoStuff = true;
         seedsCanvas.SetActive(false);
     }
     public void hideProduce()

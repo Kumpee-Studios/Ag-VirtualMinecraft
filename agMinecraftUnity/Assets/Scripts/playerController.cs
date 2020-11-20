@@ -19,6 +19,7 @@ public class playerController : MonoBehaviour
     private bool left = false;
     private bool down = true;
     public bool canDoStuff = true; //true for the interaction controller
+    public bool seedMenu = false; //need to make sure that the seed menu is open so when they click button it will plant crop
     private Transform transform2; //need this to track the transform of the tile to create the carrot on
     [SerializeField] interactionController interaction; //keeps it private while still showing in inspector
     // Start is called before the first frame update

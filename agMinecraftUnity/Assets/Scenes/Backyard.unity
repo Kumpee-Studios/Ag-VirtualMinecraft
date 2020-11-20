@@ -2625,8 +2625,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playercontroller: {fileID: 1941773085}
-  PlayerInventory: {fileID: 0}
+  PlayerInventory: {fileID: 1941773091}
   interactButton: {fileID: 1173853490}
+  seedCanvas: {fileID: 485475630}
 --- !u!1 &576868247
 GameObject:
   m_ObjectHideFlags: 0
@@ -5073,6 +5074,7 @@ MonoBehaviour:
   pauseCanvas: {fileID: 15000497}
   seedsCanvas: {fileID: 485475630}
   produceCanvas: {fileID: 1426838148}
+  playercontroller: {fileID: 1941773085}
 --- !u!1 &1152893439
 GameObject:
   m_ObjectHideFlags: 0
@@ -8429,6 +8431,7 @@ MonoBehaviour:
   controller: {fileID: 1941773090}
   canHoe: 1
   canDoStuff: 1
+  seedMenu: 0
   interaction: {fileID: 526231865}
 --- !u!212 &1941773086
 SpriteRenderer:
@@ -8573,6 +8576,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d110ba06fb016c24f87b730720cbe265, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  seedCanvas: {fileID: 485475630}
   PlayerController: {fileID: 1941773085}
   seedArray: 000000000000000000000000000000000000000000000000
   seedText:
