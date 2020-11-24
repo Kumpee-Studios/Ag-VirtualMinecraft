@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Numerics;
 using UnityEngine;
@@ -18,6 +19,9 @@ public class playerController : MonoBehaviour
     private bool left = false;
     private bool down = true;
     public bool canDoStuff = true; //true for the interaction controller
+    public bool seedMenu = false; //need to make sure that the seed menu is open so when they click button it will plant crop
+    private Transform transform2; //need this to track the transform of the tile to create the carrot on
+    [SerializeField] interactionController interaction; //keeps it private while still showing in inspector
     // Start is called before the first frame update
     void Start()
     {
@@ -83,10 +87,11 @@ public class playerController : MonoBehaviour
                 }
                 if (Input.GetKey(KeyCode.Space)) //need a way ot check if they're trying to hoe the fence
                 { //this will be generic controller so other if statements will go inside instead of one multi-condition if
-                    if (canHoe)
+                    /*if (canHoe)
                     {
                         hoeGround();
-                    }
+                    }*/
+                    interaction.handleInteraction();
                 }
             }
         }
@@ -116,7 +121,7 @@ public class playerController : MonoBehaviour
         }
         isMoving = false;
     }
-    private void hoeGround()
+    public void hoeGround()
     {
         //implement tile changing code here
         canDoStuff = false;

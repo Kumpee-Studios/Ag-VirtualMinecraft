@@ -5,6 +5,7 @@ using UnityEngine;
 public class teleportPlayer : MonoBehaviour
 {
     public GameObject moveTo;
+    [SerializeField] GameObject moveTo2;
     // Start is called before the first frame update
     void Start()
     {
