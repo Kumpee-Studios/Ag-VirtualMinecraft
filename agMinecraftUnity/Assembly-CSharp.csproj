@@ -63,7 +63,7 @@
     <Compile Include="Assets\Scripts\playerController.cs" />
     <Compile Include="Assets\Scripts\playerInventory.cs" />
     <Compile Include="Assets\Scripts\pauseMenuController.cs" />
-    <Compile Include="Assets\Scripts\carrotController.cs" />
+    <Compile Include="Assets\Scripts\plantController.cs" />
     <Compile Include="Assets\Scripts\menuManager.cs" />
     <Compile Include="Assets\Scripts\NPCControllerTest.cs" />
     <Compile Include="Assets\Scripts\teleportPlayer.cs" />
