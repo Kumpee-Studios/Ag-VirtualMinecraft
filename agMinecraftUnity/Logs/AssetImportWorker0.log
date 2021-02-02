@@ -1,0 +1,131 @@
+Using pre-set license
+Built from '2020.2/release' branch; Version is '2020.2.2f1 (068178b99f32) revision 426360'; Using compiler version '192528614'; Build Type 'Release'
+OS: 'Windows 10 Home; OS build 18363.1316; Version 1909; 64bit' Language: 'en' Physical Memory: 16313 MB
+BatchMode: 1, IsHumanControllingUs: 0, StartBugReporterOnCrash: 0, Is64bit: 1, IsPro: 0
+
+ COMMAND LINE ARGUMENTS:
+C:\Program Files\Unity\Hub\Editor\2020.2.2f1\Editor\Unity.exe
+-adb2
+-batchMode
+-noUpm
+-name
+AssetImportWorker0
+-projectPath
+C:/Users/black/Desktop/agMinecraft/agMinecraftUnity
+-logFile
+Logs/AssetImportWorker0.log
+-srvPort
+56999
+Successfully changed project path to: C:/Users/black/Desktop/agMinecraft/agMinecraftUnity
+C:/Users/black/Desktop/agMinecraft/agMinecraftUnity
+Using Asset Import Pipeline V2.
+Refreshing native plugins compatible for Editor in 45.40 ms, found 1 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Initialize engine version: 2020.2.2f1 (068178b99f32)
+[Subsystems] Discovering subsystems at path C:/Program Files/Unity/Hub/Editor/2020.2.2f1/Editor/Data/Resources/UnitySubsystems
+[Subsystems] Discovering subsystems at path C:/Users/black/Desktop/agMinecraft/agMinecraftUnity/Assets
+GfxDevice: creating device client; threaded=0
+Direct3D:
+    Version:  Direct3D 11.0 [level 11.1]
+    Renderer: Radeon RX Vega (ID=0x687f)
+    Vendor:   
+    VRAM:     8119 MB
+    Driver:   27.20.14501.18003
+Initialize mono
+Mono path[0] = 'C:/Program Files/Unity/Hub/Editor/2020.2.2f1/Editor/Data/Managed'
+Mono path[1] = 'C:/Program Files/Unity/Hub/Editor/2020.2.2f1/Editor/Data/MonoBleedingEdge/lib/mono/unityjit'
+Mono config path = 'C:/Program Files/Unity/Hub/Editor/2020.2.2f1/Editor/Data/MonoBleedingEdge/etc'
+Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56140
+Begin MonoManager ReloadAssembly
+Registering precompiled unity dll's ...
+Register platform support module: C:/Program Files/Unity/Hub/Editor/2020.2.2f1/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll
+Registered in 0.002449 seconds.
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 42.36 ms, found 1 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Invoked RoslynAnalysisRunner static constructor.
+RoslynAnalysisRunner will not be running.
+RoslynAnalysisRunner has terminated.
+Mono: successfully reloaded assembly
+- Completed reload, in  2.534 seconds
+Platform modules already initialized, skipping
+Registering precompiled user dll's ...
+Registered in 0.001276 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 42.48 ms, found 1 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Invoked RoslynAnalysisRunner static constructor.
+RoslynAnalysisRunner will not be running.
+RoslynAnalysisRunner has terminated.
+Mono: successfully reloaded assembly
+- Completed reload, in  1.041 seconds
+Platform modules already initialized, skipping
+========================================================================
+Worker process is ready to serve import requests
+Launched and connected shader compiler UnityShaderCompiler.exe after 0.04 seconds
+Refreshing native plugins compatible for Editor in 0.42 ms, found 1 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 1796 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 85.9 MB.
+System memory in use after: 86.0 MB.
+
+Unloading 19 unused Assets to reduce memory usage. Loaded Objects now: 2244.
+Total: 2.168100 ms (FindLiveObjects: 0.209000 ms CreateObjectMapping: 0.047500 ms MarkObjects: 1.827600 ms  DeleteObjects: 0.083000 ms)
+
+========================================================================
+Received Import Request.
+  path: Assets/Prefabs/sugarbeet_prefab.prefab
+  artifactKey: Guid(b62581b4aa1f4004686305260ba61b91) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/sugarbeet_prefab.prefab using Guid(b62581b4aa1f4004686305260ba61b91) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'acea87014897a5955e64dc40165a07c7') in 0.127151 seconds
+  Import took 0.130407 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000412 seconds.
+  path: Assets/Prefabs/soybean_prefab.prefab
+  artifactKey: Guid(aeaef6af7c0ac0f4b91d1e9fb47469f6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/soybean_prefab.prefab using Guid(aeaef6af7c0ac0f4b91d1e9fb47469f6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '8af1f147a07acc4865e4168599b9ed81') in 0.024626 seconds
+  Import took 0.027706 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000283 seconds.
+  path: Assets/Prefabs/squash_prefab.prefab
+  artifactKey: Guid(0e8ef5cdaaa8f9e4bae5840839655ddf) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/squash_prefab.prefab using Guid(0e8ef5cdaaa8f9e4bae5840839655ddf) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '9ba3d83fd434bf94e712f307b0728061') in 0.022150 seconds
+  Import took 0.025443 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000180 seconds.
+  path: Assets/Prefabs/corn_prefab.prefab
+  artifactKey: Guid(aa7c3ec3da336e64bbbf052f04b0624b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/corn_prefab.prefab using Guid(aa7c3ec3da336e64bbbf052f04b0624b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '58fc3aa3f02ddc493cf499b19890504d') in 0.021278 seconds
+  Import took 0.024264 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000224 seconds.
+  path: Assets/Prefabs/bean_prefab.prefab
+  artifactKey: Guid(1c42427879d80ca4eb0375885792fa9e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/bean_prefab.prefab using Guid(1c42427879d80ca4eb0375885792fa9e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'aa0f877e6948cc249530153a2722ab54') in 0.021597 seconds
+  Import took 0.024741 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000174 seconds.
+  path: Assets/Prefabs/carrot_prefab.prefab
+  artifactKey: Guid(9c339cfa1267791438858eb6c9de31a5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/carrot_prefab.prefab using Guid(9c339cfa1267791438858eb6c9de31a5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f9587fbeaccc3be3ad88539d2d1ab866') in 0.021627 seconds
+  Import took 0.024744 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 2.843499 seconds.
+  path: Assets/Scenes/Test.unity
+  artifactKey: Guid(2cda990e2423bbf4892e6590ba056729) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scenes/Test.unity using Guid(2cda990e2423bbf4892e6590ba056729) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'd25b778c3ac2ef4bc2d2c9e7ef7db0af') in 0.009021 seconds
+  Import took 0.012152 seconds .
+
+AssetImportWorkerClient::OnTransportError - code=2 error=End of file
