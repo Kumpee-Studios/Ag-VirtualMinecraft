@@ -86,11 +86,7 @@ public class playerController : MonoBehaviour
                     StartCoroutine(moveCooldown());
                 }
                 if (Input.GetKey(KeyCode.Space)) //need a way ot check if they're trying to hoe the fence
-                { //this will be generic controller so other if statements will go inside instead of one multi-condition if
-                    /*if (canHoe)
-                    {
-                        hoeGround();
-                    }*/
+                { 
                     interaction.handleInteraction();
                 }
             }

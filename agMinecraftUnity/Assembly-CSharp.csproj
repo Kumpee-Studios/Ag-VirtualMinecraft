@@ -63,13 +63,13 @@
     <Compile Include="Assets\Scripts\playerController.cs" />
     <Compile Include="Assets\Scripts\playerInventory.cs" />
     <Compile Include="Assets\Scripts\pauseMenuController.cs" />
-    <Compile Include="Assets\Scripts\plantController.cs" />
     <Compile Include="Assets\Scripts\menuManager.cs" />
     <Compile Include="Assets\Scripts\NPCControllerTest.cs" />
     <Compile Include="Assets\Scripts\teleportPlayer.cs" />
     <Compile Include="Assets\Scripts\interactionController.cs" />
     <Compile Include="Assets\Scripts\dirtController.cs" />
     <Compile Include="Assets\Scripts\bigFarmCanvasManager.cs" />
+    <Compile Include="Assets\Scripts\plantManager.cs" />
   </ItemGroup>
   <ItemGroup>
      <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 9005324670810561962}
   - component: {fileID: 9005324670810561960}
   - component: {fileID: 1758676602069774562}
+  - component: {fileID: -4267066683107479353}
   m_Layer: 7
   m_Name: bean_prefab
   m_TagString: Plant
@@ -130,3 +131,15 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.34, y: 0.34}
   m_EdgeRadius: 0
+--- !u!114 &-4267066683107479353
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9005324670810561973}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0115bacd6482b9349b78c75bd6ade45e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

@@ -1,9 +1,10 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class carrotController : MonoBehaviour
+public class plantManager : MonoBehaviour
 {
+    public int plantNumber; //using this to store reference so that it can be called from interactioncontroller
     // Start is called before the first frame update
     void Start()
     {
@@ -14,9 +15,5 @@ public class carrotController : MonoBehaviour
     void Update()
     {
         
-    }
-    private void Awake()
-    {
-
     }
 }

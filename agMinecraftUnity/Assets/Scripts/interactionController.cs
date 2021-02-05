@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 using UnityEngine.UI;
@@ -9,11 +10,13 @@ public class interactionController : MonoBehaviour
     public playerController playercontroller;
     public playerInventory PlayerInventory;
     public GameObject interactButton;
+    public Text interactText;
+    public timerBarController controller;
     public GameObject seedCanvas;
-    private bool dirt = false;
-    public dirtController adjustBool;
+    private bool dirt = false; //using these bools to control which interaction is used
+    private bool canHarvest = false;
+    private bool deadPlant = false;
     public GameObject[] collisions; //shouldn't need 2, but just in case...
-    public LayerMask plantMask;
     // Start is called before the first frame update
     void Start()
     {
@@ -29,7 +32,7 @@ public class interactionController : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log(collision.gameObject.tag);
+     //Debug.Log(collision.gameObject.tag); //leaving this here JUST in case
      if(collision.gameObject.tag == "Walls")
         {
             playercontroller.canHoe = false;
@@ -37,53 +40,78 @@ public class interactionController : MonoBehaviour
      else if(collision.gameObject.tag == "Plant")
         {
             collisions[0] = collision.gameObject;
-            adjustBool.canInteract = false;
             AnimatorClipInfo[] info = collision.GetComponent<Animator>().GetCurrentAnimatorClipInfo(0);
-            //Debug.Log(collision.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0));
             if(info[0].clip.name.Contains("harvest"))
             {
-                Debug.Log("Got em");
-                //implement actual harvesting code here, probably need to grab name of plant from animator, then add seeds of that plant type to the inventory
-            }
-            else 
+                canHarvest = true;
+                interactButton.SetActive(true); //Yes I know having this in two places seems inefficient, I tried it the other way
+                interactText.text = "Harvest";
+            }else if(info[0].clip.name.Contains("dead"))
             {
-                playercontroller.canHoe = false;
+                deadPlant = true;
+                interactButton.SetActive(true); //if you have it not twice, it shows the button but you can't interact with it
+                interactText.text = "Remove";
             }
+                playercontroller.canHoe = false;
         }
-     else if(collision.gameObject.tag == "Dirt" && playercontroller.canDoStuff == true && !Physics2D.IsTouchingLayers(collision.GetComponent<TilemapCollider2D>(), plantMask))
+     else if(collision.gameObject.tag == "Dirt" && playercontroller.canDoStuff == true)
         {
-            Debug.Log(collision.GetComponent<TilemapCollider2D>());
-            Debug.Log(Physics2D.IsTouchingLayers(collision.GetComponent<TilemapCollider2D>(), plantMask));
-//            collisions[0] = collision.gameObject;
-            //adjustBool = collision.gameObject.GetComponent<dirtController>(); //storing reference to object here so that I can adjust boolean later in code
-            interactButton.SetActive(true);
-            dirt = true;
+            StartCoroutine(checkPlant());
         }   
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (adjustBool != null) //check that the dirtController has been stored as a variable
-        {
-            adjustBool.canInteract = true;
-        }
         collisions[0] = null;
         playercontroller.canHoe = true; //so this isn't entirely foolproof, will need to adjust multiple bools possibly
+        canHarvest = false;
+        deadPlant = false;
         interactButton.SetActive(false);//not sure since I might be able to figure out what this collides with from player controller using tags
         dirt = false;
+        StopCoroutine("checkPlant"); //in case they mouse off in 5 milliseconds or less, make sure it doesn't display interact
     }
     public void handleInteraction()
     {
-        if (dirt && playercontroller.canDoStuff && !playercontroller.seedMenu)
-        {
-            //PlayerInventory.StartCoroutine("plantCarrot"); handled from buttons in seedCanvas
-            dirt = false;//should put a boolean in the dirt controller script to check if it has been planted on already
-            //adjustBool.canInteract = false;
+        if(canHarvest)
+        {//yes this method call looks like a mess, it grabs the integer that the plantmanager script is storing and passes it to the harvest plant method of PlayerInventory
+            StartCoroutine(PlayerInventory.HarvestPlant(collisions[0].gameObject.GetComponent<plantManager>().plantNumber));
             playercontroller.canDoStuff = false;
+            StartCoroutine(playercontroller.moveAgain(3f));
+            interactButton.SetActive(false);//not sure since I might be able to figure out what this collides with from player controller using tags
+            controller.startTimer(3f, "Harvesting Plant"); //displaying bar so user knows they're doing something
+            StartCoroutine(removePlant()); //removing plant after harvest to prevent spam
+        }
+        else if(deadPlant)
+        {
+            interactButton.SetActive(false);//not sure since I might be able to figure out what this collides with from player controller using tags
+            playercontroller.canDoStuff = false;
+            StartCoroutine(playercontroller.moveAgain(3f));
+            controller.startTimer(3f, "Removing Plant");
+            StartCoroutine(removePlant());
+        }
+        else if (dirt && playercontroller.canDoStuff && !playercontroller.seedMenu) //had to adjust order of if else statements
+        {
+            dirt = false;
             playercontroller.seedMenu = true;
             seedCanvas.SetActive(true);
+            playercontroller.canHoe = false;
         } else if(playercontroller.canHoe)
         {
             playercontroller.hoeGround();
         }
+    }
+    public IEnumerator checkPlant()
+    {
+        yield return new WaitForSeconds(.005f); //should wait 5/1000th's of a second, should be practically imperceptible to a player
+        if (collisions[0] == null)
+        {
+            interactButton.SetActive(true); //gives game chance to update whether the dirt tile has a plant on top of it
+            interactText.text = "Plant seed";
+            dirt = true; //if it doesn't then they can plant seeds
+        }
+    }
+    public IEnumerator removePlant()
+    { //need this for once they finish harvesting and when they remove dead plant
+        yield return new WaitForSeconds(3f);
+        Destroy(collisions[0].gameObject); //destroy the plant if its dead
     }
 }
