@@ -68,8 +68,8 @@
     <Compile Include="Assets\Scripts\teleportPlayer.cs" />
     <Compile Include="Assets\Scripts\interactionController.cs" />
     <Compile Include="Assets\Scripts\dirtController.cs" />
-    <Compile Include="Assets\Scripts\bigFarmCanvasManager.cs" />
     <Compile Include="Assets\Scripts\plantManager.cs" />
+    <Compile Include="Assets\Scripts\bigFarmCanvasManager.cs" />
   </ItemGroup>
   <ItemGroup>
      <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

@@ -1,12 +1,16 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class canvasController : MonoBehaviour
 {
     public GameObject pauseCanvas;
     public GameObject seedsCanvas;
+    public Button[] seedButtons = new Button[6];
     public GameObject produceCanvas;
+    public Button[] produceButtons = new Button[6];
+    public GameObject buySeedsCanvas;
     public playerController playercontroller;
     // Start is called before the first frame update
     void Start()
@@ -17,14 +21,19 @@ public class canvasController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!pauseCanvas.activeInHierarchy)
-        {
-            if (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.P))
+            if(Input.GetKeyDown(KeyCode.Escape) && !pauseCanvas.activeInHierarchy && (seedsCanvas.activeSelf || produceCanvas.activeSelf || buySeedsCanvas.activeSelf))
+                {
+                    seedsCanvas.SetActive(false);
+                    produceCanvas.SetActive(false);
+                    buySeedsCanvas.SetActive(false);
+                    hideSeeds();
+                    hideProduce();
+                }
+            else if ((Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.P)) && !pauseCanvas.activeInHierarchy)
             {
                 pauseCanvas.SetActive(true);
                 Time.timeScale = 0f;
             }
-        }
     }
     public void showSeeds()
     {
@@ -53,10 +62,39 @@ public class canvasController : MonoBehaviour
         playercontroller.seedMenu = false;
         playercontroller.canDoStuff = true;
         seedsCanvas.SetActive(false);
+        uninteractableSeeds();
     }
     public void hideProduce()
     {
         produceCanvas.SetActive(false);
+        uninteractableProduce();
     }
-
+    public void interactableSeeds()
+    {
+        foreach (Button button in seedButtons)
+        {
+            button.interactable = true;
+        }
+    }
+    public void uninteractableSeeds()
+    {
+        foreach(Button button in seedButtons)
+        {
+            button.interactable = false;
+        }
+    }
+    public void interactableProduce()
+    {
+        foreach (Button button in produceButtons)
+        {
+            button.interactable = true;
+        }
+    }
+    public void uninteractableProduce()
+    {
+        foreach(Button button in produceButtons)
+        {
+            button.interactable = false;
+        }
+    }
 }

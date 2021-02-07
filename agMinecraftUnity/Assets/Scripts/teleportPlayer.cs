@@ -5,7 +5,7 @@ using UnityEngine;
 public class teleportPlayer : MonoBehaviour
 {
     public GameObject moveTo;
-    [SerializeField] GameObject moveTo2;
+    //[SerializeField] GameObject moveTo2; //why did I have this here anyways?
     // Start is called before the first frame update
     void Start()
     {
@@ -19,7 +19,10 @@ public class teleportPlayer : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        
-        collision.gameObject.transform.position = moveTo.gameObject.transform.position;
+        if (collision.gameObject.tag == "Player")
+        {
+            collision.gameObject.GetComponent<playerController>().getInteractionController().flipTown();
+            collision.gameObject.transform.position = moveTo.gameObject.transform.position;
+        }
     }
 }

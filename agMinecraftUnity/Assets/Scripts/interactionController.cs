@@ -12,10 +12,13 @@ public class interactionController : MonoBehaviour
     public GameObject interactButton;
     public Text interactText;
     public timerBarController controller;
-    public GameObject seedCanvas;
+    public canvasController CanvasController;
     private bool dirt = false; //using these bools to control which interaction is used
+    private bool inTown = false; //tracking whether user is somewhere they can hoe or not
     private bool canHarvest = false;
     private bool deadPlant = false;
+    private bool seedSeller = false;
+    private bool produceBuyer = false;
     public GameObject[] collisions; //shouldn't need 2, but just in case...
     // Start is called before the first frame update
     void Start()
@@ -32,7 +35,7 @@ public class interactionController : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-     //Debug.Log(collision.gameObject.tag); //leaving this here JUST in case
+     Debug.Log(collision.gameObject.tag); //leaving this here JUST in case
      if(collision.gameObject.tag == "Walls")
         {
             playercontroller.canHoe = false;
@@ -52,12 +55,24 @@ public class interactionController : MonoBehaviour
                 interactButton.SetActive(true); //if you have it not twice, it shows the button but you can't interact with it
                 interactText.text = "Remove";
             }
-                playercontroller.canHoe = false;
+            playercontroller.canHoe = false;
         }
      else if(collision.gameObject.tag == "Dirt" && playercontroller.canDoStuff == true)
         {
             StartCoroutine(checkPlant());
         }   
+     else if(collision.gameObject.tag == "SeedSeller")
+        {
+            seedSeller = true;
+            interactButton.SetActive(true); //if you have it not twice, it shows the button but you can't interact with it
+            interactText.text = "Buy Seeds";
+        }
+    else if(collision.gameObject.tag == "ProduceBuyer")
+        {
+            produceBuyer = true;
+            interactButton.SetActive(true); //if you have it not twice, it shows the button but you can't interact with it
+            interactText.text = "Sell Produce";
+        }
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
@@ -67,6 +82,8 @@ public class interactionController : MonoBehaviour
         deadPlant = false;
         interactButton.SetActive(false);//not sure since I might be able to figure out what this collides with from player controller using tags
         dirt = false;
+        seedSeller = false;
+        produceBuyer = false;
         StopCoroutine("checkPlant"); //in case they mouse off in 5 milliseconds or less, make sure it doesn't display interact
     }
     public void handleInteraction()
@@ -92,11 +109,22 @@ public class interactionController : MonoBehaviour
         {
             dirt = false;
             playercontroller.seedMenu = true;
-            seedCanvas.SetActive(true);
+            CanvasController.showSeeds();
+            CanvasController.interactableSeeds();
             playercontroller.canHoe = false;
-        } else if(playercontroller.canHoe)
+            playercontroller.canDoStuff = false;
+        } else if(playercontroller.canHoe && !inTown)
         {
             playercontroller.hoeGround();
+        } else if(seedSeller)
+        {
+            //do seed stuff here
+        } else if (produceBuyer)
+        {
+            CanvasController.showProduce();
+            CanvasController.interactableProduce();
+            interactButton.SetActive(false);
+            //playercontroller.canDoStuff = false;
         }
     }
     public IEnumerator checkPlant()
@@ -113,5 +141,9 @@ public class interactionController : MonoBehaviour
     { //need this for once they finish harvesting and when they remove dead plant
         yield return new WaitForSeconds(3f);
         Destroy(collisions[0].gameObject); //destroy the plant if its dead
+    }
+    public void flipTown() //using this in an attempt to prevent hoe-ing while in town or in the shed
+    {
+        inTown = !inTown;
     }
 }

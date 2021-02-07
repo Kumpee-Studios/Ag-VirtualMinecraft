@@ -7,15 +7,14 @@ using UnityEngine.Tilemaps;
 
 public class playerController : MonoBehaviour
 {
+    [SerializeField] int speed = 8;
     public GridLayout grid;
     public Tilemap gridTilemap;
     public TileBase hoedGround;
     public float moveSpeed = 5; //how fast player moves
-    public Transform movePoint; //this is the point that the player will move towards
     public GameObject hoePoint; //grabbing reference to 'hoe' spot player can use to till ground
     public timerBarController controller;
     public bool canHoe = true; //this will be accessed from the interactionController to adjust what action is taken when space is pressed, will require mulitple bools
-    private bool isMoving = false;
     private bool left = false;
     private bool down = true;
     public bool canDoStuff = true; //true for the interaction controller
@@ -25,7 +24,7 @@ public class playerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        movePoint.parent = null; //keeps scene organized, basically making movepoint an orphan to avoid an infinite player movement loop
+
     }
 
     // Update is called once per frame
@@ -33,9 +32,6 @@ public class playerController : MonoBehaviour
     {
         if (canDoStuff)
         {
-            transform.position = UnityEngine.Vector3.MoveTowards(transform.position, movePoint.position, moveSpeed * Time.deltaTime);
-            if (!isMoving && UnityEngine.Vector3.Distance(transform.position, movePoint.position) <= 0.05f)
-            {
                 if (Input.GetKey(KeyCode.W))
                 {
                     if (down) //work in progress, will probably just wind up using sprite anims...not sure. Will need spritesheet first
@@ -45,8 +41,6 @@ public class playerController : MonoBehaviour
                         hoePoint.gameObject.transform.position = this.gameObject.transform.position + new UnityEngine.Vector3(0, 1.5f, 0);
                     }
                     moveUp();
-                    isMoving = true;
-                    StartCoroutine(moveCooldown());
                 }
                 if (Input.GetKey(KeyCode.S))
                 {
@@ -57,8 +51,6 @@ public class playerController : MonoBehaviour
                         hoePoint.gameObject.transform.position = this.gameObject.transform.position + new UnityEngine.Vector3(0, -1.5f, 0); //adjusts where they can hoe the ground
                     }
                     moveDown();
-                    isMoving = true;
-                    StartCoroutine(moveCooldown());
                 }
                 if (Input.GetKey(KeyCode.A))
                 {
@@ -70,8 +62,6 @@ public class playerController : MonoBehaviour
 
                     }
                     moveLeft();
-                    isMoving = true;
-                    StartCoroutine(moveCooldown());
                 }
                 if (Input.GetKey(KeyCode.D))
                 {
@@ -82,40 +72,28 @@ public class playerController : MonoBehaviour
                         hoePoint.gameObject.transform.position = this.gameObject.transform.position + new UnityEngine.Vector3(1.5f, 0, 0); //since I'm rotating the sprite this just has to be 0
                     }
                     moveRight();
-                    isMoving = true;
-                    StartCoroutine(moveCooldown());
                 }
-                if (Input.GetKey(KeyCode.Space)) //need a way ot check if they're trying to hoe the fence
+                if (Input.GetKey(KeyCode.Space)) 
                 { 
                     interaction.handleInteraction();
                 }
-            }
         }
     }
     private void moveUp() //could be refactored into single switch statement but is not entirely necessary...
     {
-        movePoint.position += new UnityEngine.Vector3(0f, 1f, 0f);
+        transform.position += new UnityEngine.Vector3(0, speed * Time.deltaTime, 0);
     }
     private void moveDown()
     {
-        movePoint.position += new UnityEngine.Vector3(0f, -1f, 0f);
+        transform.position += new UnityEngine.Vector3(0, -speed * Time.deltaTime, 0);
     }
     private void moveLeft()
     {
-        movePoint.position += new UnityEngine.Vector3(-1f, 0f, 0f);
+        transform.position += new UnityEngine.Vector3(-speed * Time.deltaTime, 0, 0);
     }
     private void moveRight()
     {
-        movePoint.position += new UnityEngine.Vector3(1f, 0f, 0f);
-    }
-    private IEnumerator moveCooldown()
-    {
-        yield return new WaitForSeconds(.1f); //no idea how long moving one square will take, change the float value to reflect movespeed
-        if(UnityEngine.Vector3.Distance(transform.position, movePoint.position) > 0)
-        {
-            movePoint.position = transform.position;
-        }
-        isMoving = false;
+        transform.position += new UnityEngine.Vector3(speed * Time.deltaTime, 0, 0);
     }
     public void hoeGround()
     {
@@ -135,5 +113,9 @@ public class playerController : MonoBehaviour
     {
         yield return new WaitForSeconds(delay);
         canDoStuff = true;
+    }
+    public interactionController getInteractionController()
+    {
+        return interaction;
     }
 }
