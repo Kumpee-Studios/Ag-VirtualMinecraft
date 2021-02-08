@@ -28,6 +28,7 @@ public class canvasController : MonoBehaviour
                     buySeedsCanvas.SetActive(false);
                     hideSeeds();
                     hideProduce();
+                    hideSeedSeller();
                 }
             else if ((Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.P)) && !pauseCanvas.activeInHierarchy)
             {
@@ -52,10 +53,18 @@ public class canvasController : MonoBehaviour
         {
             produceCanvas.SetActive(true);
             seedsCanvas.SetActive(false);
+            playercontroller.canDoStuff = false;
         } else
         {
             hideProduce();
         }
+    }
+    public void showSeedSeller()
+    {
+        hideSeeds(); //making sure they don't have any other tabs open
+        hideProduce();
+        buySeedsCanvas.SetActive(true);
+        playercontroller.canDoStuff = false;
     }
     public void hideSeeds() //splitting these methods up so that I can use them here and call them whenever an item is selected from one of these menus
     {
@@ -66,8 +75,14 @@ public class canvasController : MonoBehaviour
     }
     public void hideProduce()
     {
+        playercontroller.canDoStuff = true;
         produceCanvas.SetActive(false);
         uninteractableProduce();
+    }
+    public void hideSeedSeller()
+    {
+        buySeedsCanvas.SetActive(false);
+        playercontroller.canDoStuff = true;
     }
     public void interactableSeeds()
     {

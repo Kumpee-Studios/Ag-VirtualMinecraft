@@ -48,11 +48,13 @@ public class playerInventory : MonoBehaviour
             CanvasController.uninteractableSeeds(); //making sure if they click the canvas button they can't click on a button again
             PlayerController.canDoStuff = false; //adding this here since it gets flipped to true in the canvas controller script, need to leave it that way so they can 'cancel' planting a seed and not freeze in place
             PlayerController.controller.startTimer(2.5f, "Planting seed");
+            //PlayerController.moveAgain(2.5f);
             yield return new WaitForSeconds(2.5f);
             Instantiate(plantArray[plant], (StringVector(hoeTile.ToString()) + new UnityEngine.Vector3(0.5f, 0.5f, 0f)), UnityEngine.Quaternion.Euler(0, 0, 0)); //changing name to carrotTile
             seedArray[plant] -= 1; //deleting the numbers from end of string using TrimEnd to remove number and then concatenating the new number of seeds left
             seedText[plant].text = seedText[plant].text.TrimEnd(numbers) + seedArray[plant];
             PlayerController.seedMenu = false; //don't forget like I did to set the bool to false for the poor player
+            PlayerController.canDoStuff = true; //I thought the moveAgain method would work, maybe I adjusted the wrong bool...
         }
         else //this else statement SHOULD NOT be necessary, but it's here as a failsafe if they somehow try to double plant
         {
@@ -103,6 +105,17 @@ public class playerInventory : MonoBehaviour
                     money += 4;
                     break;
             }
+            moneyText.text = moneyText.text.TrimEnd(numbers) + money;
+            produceText[plant].text = produceText[plant].text.TrimEnd(numbers) + produceArray[plant];
+        }
+    }
+    public void buyPlant(int plant)
+    {
+        if(money >= 2)
+        {
+            seedArray[plant] += 1; //adding seed to inventory and updating text
+            seedText[plant].text = seedText[plant].text.TrimEnd(numbers) + seedArray[plant];
+            money -= 2;
             moneyText.text = moneyText.text.TrimEnd(numbers) + money;
         }
     }

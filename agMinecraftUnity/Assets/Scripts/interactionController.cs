@@ -107,6 +107,7 @@ public class interactionController : MonoBehaviour
         }
         else if (dirt && playercontroller.canDoStuff && !playercontroller.seedMenu) //had to adjust order of if else statements
         {
+            interactButton.SetActive(false);
             dirt = false;
             playercontroller.seedMenu = true;
             CanvasController.showSeeds();
@@ -119,6 +120,7 @@ public class interactionController : MonoBehaviour
         } else if(seedSeller)
         {
             //do seed stuff here
+            CanvasController.showSeedSeller();
         } else if (produceBuyer)
         {
             CanvasController.showProduce();
