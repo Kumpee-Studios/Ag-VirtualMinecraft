@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class playerInventory : MonoBehaviour
 {
@@ -9,6 +10,7 @@ public class playerInventory : MonoBehaviour
     public TextMeshProUGUI moneyText;
     public canvasController CanvasController;
     public playerController PlayerController;
+    [SerializeField] interactionController InteractionController; //using this sovlely for saving
     //need 6 ints to hold number of each seed, array might be better
     public int[] seedArray = new int[6]; //values of number of seeds they have and text to display them in inventory
     public TextMeshProUGUI[] seedText = new TextMeshProUGUI[6];
@@ -18,22 +20,23 @@ public class playerInventory : MonoBehaviour
     [Tooltip("Alphabetical order, bean, carrot, corn, soybean, squash, sugarbeet. Please don't change unless you like making a hard time for yourself.")]
     public GameObject[] plantArray = new GameObject[6]; //in order of prefabs alphabetically: bean, carrot, corn, soybean, squash, sugarbeet
     public List<string> stringCoords = new List<string>();
-    private char[] numbers = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9'}; //just so you don't have to create an array every time you update produce ect.
+    private char[] numbers = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9' }; //just so you don't have to create an array every time you update produce ect.
 
     // Start is called before the first frame update
     void Start()
     {
         //remove this later, I need to be able to plant seeds right now
-        for(int number = 0; number < seedArray.Length; number++)
+        for (int number = 0; number < seedArray.Length; number++)
         {
             seedArray[number] = 3; //just trying to set all values of seeds to 5 to make sure I test each one
         }
+        loadInfo(); //calling this after setting all seeds to 3. If they haven't played before it should return null and give them 3 seeds of each
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
     public void plantMethod(int plant) //same as harvestMethod
     {
@@ -107,15 +110,46 @@ public class playerInventory : MonoBehaviour
             }
             moneyText.text = moneyText.text.TrimEnd(numbers) + money;
             produceText[plant].text = produceText[plant].text.TrimEnd(numbers) + produceArray[plant];
+            if(money >= 10) //10 for testing purposes, adjust as needed
+            {
+                //implement end game stuff here
+                saveInfo();
+                SceneManager.LoadSceneAsync("LevelUp");
+            }
         }
     }
     public void buyPlant(int plant)
     {
-        if(money >= 2)
+        if (money >= 2)
         {
             seedArray[plant] += 1; //adding seed to inventory and updating text
             seedText[plant].text = seedText[plant].text.TrimEnd(numbers) + seedArray[plant];
             money -= 2;
+            moneyText.text = moneyText.text.TrimEnd(numbers) + money;
+        }
+    }
+    public void saveInfo() //saves player information
+    {
+        saveSystem.savePlayer(PlayerController, this, InteractionController); ;
+    }
+    public void loadInfo() //unpacks player info and sets various variables equal to what they should be
+    {
+        saveInformation stats = saveSystem.loadData();
+        if (stats != null) //make sure they HAVE a save file or you can break the game if you want
+        {
+            seedArray = stats.seeds;
+            produceArray = stats.produce;
+            money = stats.money;
+            InteractionController.inTown = stats.town;
+            Vector3 playerPosition = new Vector3(stats.position[0], stats.position[1], stats.position[2]);
+            foreach (int num in seedArray) //setting all seeds to where they should be
+            {
+                seedText[num].text = seedText[num].text.TrimEnd(numbers) + seedArray[num]; //removing number of seeds from both seeds and produce, then adding new number to end of string
+            }
+            foreach (int num in produceArray) //adjusting produce text
+            {
+                produceText[num].text = produceText[num].text.TrimEnd(numbers) + produceArray[num];
+            }
             moneyText.text = moneyText.text.TrimEnd(numbers) + money;
         }
     }

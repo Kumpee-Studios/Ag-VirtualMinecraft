@@ -6,12 +6,14 @@ using UnityEngine.SceneManagement;
 public class pauseMenuController : MonoBehaviour
 {
     public GameObject pauseCanvas;
+    public playerInventory PlayerInventory;
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         //pauseCanvas.SetActive(false);
+        PlayerInventory = GameObject.FindGameObjectWithTag("Player").GetComponent<playerInventory>();
+        Debug.Log(PlayerInventory);
     }
-
     // Update is called once per frame
     void Update()
     {
@@ -23,15 +25,16 @@ public class pauseMenuController : MonoBehaviour
     }
     public void quitGame()
     {
-        saveGame();
+        saveGame(); //saving game before closing, hopefully it doesn't close too fast
         Application.Quit();
     }
     public void saveGame()
     {
-        Debug.Log("I'll get there eventually");
+        PlayerInventory.saveInfo();
     }
     public void mainmenu()
     {
+        saveGame(); //saving game before loading main menu
         SceneManager.LoadSceneAsync("MainMenu");
     }
     public void resume()

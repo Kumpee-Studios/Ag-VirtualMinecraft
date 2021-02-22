@@ -7,6 +7,7 @@ using UnityEngine.Tilemaps;
 
 public class playerController : MonoBehaviour
 {
+    [SerializeField] Animator animator;
     [SerializeField] int speed = 8;
     public GridLayout grid;
     public Tilemap gridTilemap;
@@ -19,7 +20,6 @@ public class playerController : MonoBehaviour
     private bool down = true;
     public bool canDoStuff = true; //true for the interaction controller
     public bool seedMenu = false; //need to make sure that the seed menu is open so when they click button it will plant crop
-    private Transform transform2; //need this to track the transform of the tile to create the carrot on
     [SerializeField] interactionController interaction; //keeps it private while still showing in inspector
     // Start is called before the first frame update
     void Start()
@@ -38,7 +38,7 @@ public class playerController : MonoBehaviour
                     {
                         down = !down;
                         //this.gameObject.transform.rotation = UnityEngine.Quaternion.Euler(90, 0, 0);
-                        hoePoint.gameObject.transform.position = this.gameObject.transform.position + new UnityEngine.Vector3(0, 1.5f, 0);
+                        hoePoint.gameObject.transform.position = this.gameObject.transform.position + new UnityEngine.Vector3(0, 1f, 0);
                     }
                     moveUp();
                 }
@@ -48,9 +48,9 @@ public class playerController : MonoBehaviour
                     {
                         down = !down;
                         //this.gameObject.transform.rotation = UnityEngine.Quaternion.Euler(-90, 0, 0);
-                        hoePoint.gameObject.transform.position = this.gameObject.transform.position + new UnityEngine.Vector3(0, -1.5f, 0); //adjusts where they can hoe the ground
+                        hoePoint.gameObject.transform.position = this.gameObject.transform.position + new UnityEngine.Vector3(0, -1f, 0); //adjusts where they can hoe the ground
                     }
-                    moveDown();
+                moveDown();
                 }
                 if (Input.GetKey(KeyCode.A))
                 {
@@ -58,7 +58,7 @@ public class playerController : MonoBehaviour
                     {
                         left = !left; //the rotate brings the hoe point with it
                         this.gameObject.transform.rotation = UnityEngine.Quaternion.Euler(0, 180, 0);
-                        hoePoint.gameObject.transform.position = this.gameObject.transform.position + new UnityEngine.Vector3(-1.5f, 0, 0); //since I'm rotating the sprite this just has to be 0
+                        hoePoint.gameObject.transform.position = this.gameObject.transform.position + new UnityEngine.Vector3(-1f, 0, 0); //since I'm rotating the sprite this just has to be 0
 
                     }
                     moveLeft();
@@ -69,9 +69,9 @@ public class playerController : MonoBehaviour
                     {
                         left = !left;
                         this.gameObject.transform.rotation = UnityEngine.Quaternion.Euler(0, 0, 0);
-                        hoePoint.gameObject.transform.position = this.gameObject.transform.position + new UnityEngine.Vector3(1.5f, 0, 0); //since I'm rotating the sprite this just has to be 0
+                        hoePoint.gameObject.transform.position = this.gameObject.transform.position + new UnityEngine.Vector3(1f, 0, 0); //since I'm rotating the sprite this just has to be 0
                     }
-                    moveRight();
+                moveRight();
                 }
                 if (Input.GetKey(KeyCode.Space)) 
                 { 
@@ -81,18 +81,22 @@ public class playerController : MonoBehaviour
     }
     private void moveUp() //could be refactored into single switch statement but is not entirely necessary...
     {
+        animator.SetTrigger("up");
         transform.position += new UnityEngine.Vector3(0, speed * Time.deltaTime, 0);
     }
     private void moveDown()
     {
+        animator.SetTrigger("down");
         transform.position += new UnityEngine.Vector3(0, -speed * Time.deltaTime, 0);
     }
     private void moveLeft()
     {
+        animator.SetTrigger("walk");
         transform.position += new UnityEngine.Vector3(-speed * Time.deltaTime, 0, 0);
     }
     private void moveRight()
     {
+        animator.SetTrigger("walk");
         transform.position += new UnityEngine.Vector3(speed * Time.deltaTime, 0, 0);
     }
     public void hoeGround()
@@ -102,16 +106,18 @@ public class playerController : MonoBehaviour
         StartCoroutine(moveAgain(3f));
         controller.startTimer(3f, "Breaking ground");
         Vector3Int hoeTile = grid.WorldToCell(hoePoint.transform.position); //figuring out the x,y,z coordinate the of tile to hoe
-        Debug.Log(hoeTile); //printing it for sanity's sake
+        //Debug.Log(hoeTile); //printing it for sanity's sake
         gridTilemap.SetTile(hoeTile, hoedGround); //so, SetTile must have capital S and T, spent a while figuring that out
         //outside of that you need a reference to the tilemap not just the grid even though grid inherits FROM tilemap
         //after that just feed the SetTile the tile in question you want to instantiate (using a seperate layer with colliders)
         //and where to instantiate it. I wrote that backwards, location, tile to create. 
+        animator.SetTrigger("hoe");
     }
 
     public IEnumerator moveAgain(float delay)
     {
         yield return new WaitForSeconds(delay);
+        animator.SetTrigger("idle");
         canDoStuff = true;
     }
     public interactionController getInteractionController()

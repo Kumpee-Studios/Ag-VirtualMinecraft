@@ -14,7 +14,7 @@ public class interactionController : MonoBehaviour
     public timerBarController controller;
     public canvasController CanvasController;
     private bool dirt = false; //using these bools to control which interaction is used
-    private bool inTown = false; //tracking whether user is somewhere they can hoe or not
+    public bool inTown = false; //tracking whether user is somewhere they can hoe or not making public for saving
     private bool canHarvest = false;
     private bool deadPlant = false;
     private bool seedSeller = false;
@@ -119,14 +119,12 @@ public class interactionController : MonoBehaviour
             playercontroller.hoeGround();
         } else if(seedSeller)
         {
-            //do seed stuff here
             CanvasController.showSeedSeller();
         } else if (produceBuyer)
         {
             CanvasController.showProduce();
             CanvasController.interactableProduce();
             interactButton.SetActive(false);
-            //playercontroller.canDoStuff = false;
         }
     }
     public IEnumerator checkPlant()

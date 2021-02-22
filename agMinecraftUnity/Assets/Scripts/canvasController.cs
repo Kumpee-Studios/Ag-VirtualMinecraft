@@ -15,7 +15,7 @@ public class canvasController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        playercontroller = GameObject.FindGameObjectWithTag("Player").GetComponent<playerController>();
     }
 
     // Update is called once per frame

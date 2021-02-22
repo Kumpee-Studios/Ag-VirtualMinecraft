@@ -69,9 +69,11 @@
     <Compile Include="Assets\Scripts\interactionController.cs" />
     <Compile Include="Assets\Scripts\dirtController.cs" />
     <Compile Include="Assets\Scripts\plantManager.cs" />
+    <Compile Include="Assets\Scripts\TextMeshProGUI.cs" />
     <Compile Include="Assets\Scripts\bigFarmCanvasManager.cs" />
     <Compile Include="Assets\Scripts\levelUpController.cs" />
-    <Compile Include="Assets\Scripts\TextMeshProGUI.cs" />
+    <Compile Include="Assets\Scripts\SavingScripts\saveInformation.cs" />
+    <Compile Include="Assets\Scripts\SavingScripts\saveSystem.cs" />
   </ItemGroup>
   <ItemGroup>
      <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
