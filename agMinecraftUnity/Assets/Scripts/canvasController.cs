@@ -54,6 +54,8 @@ public class canvasController : MonoBehaviour
             produceCanvas.SetActive(true);
             seedsCanvas.SetActive(false);
             playercontroller.canDoStuff = false;
+            //interactableProduce(); //remember to make sure they can click the produce buttons
+            //this should've been called from the interaction controller, hrmm
         } else
         {
             hideProduce();
@@ -100,6 +102,7 @@ public class canvasController : MonoBehaviour
     }
     public void interactableProduce()
     {
+        Debug.Log("Interactable Produce called");
         foreach (Button button in produceButtons)
         {
             button.interactable = true;

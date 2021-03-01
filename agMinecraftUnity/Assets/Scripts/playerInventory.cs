@@ -84,6 +84,8 @@ public class playerInventory : MonoBehaviour
     }
     public void sellProduce(int plant)
     {
+        Debug.Log("This is the plant variable: " + plant);
+        Debug.Log("Produce array of plant: " + produceArray[plant]);
         if (produceArray[plant] > 0)
         {
             produceArray[plant] -= 1;
@@ -142,6 +144,7 @@ public class playerInventory : MonoBehaviour
             money = stats.money;
             InteractionController.inTown = stats.town;
             Vector3 playerPosition = new Vector3(stats.position[0], stats.position[1], stats.position[2]);
+            GameObject.FindGameObjectWithTag("Player").gameObject.transform.position = playerPosition;
             foreach (int num in seedArray) //setting all seeds to where they should be
             {
                 seedText[num].text = seedText[num].text.TrimEnd(numbers) + seedArray[num]; //removing number of seeds from both seeds and produce, then adding new number to end of string
