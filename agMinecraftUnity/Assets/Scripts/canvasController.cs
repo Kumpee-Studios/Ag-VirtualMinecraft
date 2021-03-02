@@ -12,10 +12,24 @@ public class canvasController : MonoBehaviour
     public Button[] produceButtons = new Button[6];
     public GameObject buySeedsCanvas;
     public playerController playercontroller;
+    public playerInventory playerinventory;
     // Start is called before the first frame update
     void Start()
     {
         playercontroller = GameObject.FindGameObjectWithTag("Player").GetComponent<playerController>();
+        playerinventory = GameObject.FindGameObjectWithTag("Player").GetComponent<playerInventory>();
+        seedButtons[0].onClick.AddListener(() => playerinventory.plantMethod(0));
+        seedButtons[1].onClick.AddListener(() => playerinventory.plantMethod(1));
+        seedButtons[2].onClick.AddListener(() => playerinventory.plantMethod(2));
+        seedButtons[3].onClick.AddListener(() => playerinventory.plantMethod(3));
+        seedButtons[4].onClick.AddListener(() => playerinventory.plantMethod(4));
+        seedButtons[5].onClick.AddListener(() => playerinventory.plantMethod(5));
+        produceButtons[0].onClick.AddListener(() => playerinventory.sellProduce(0));
+        produceButtons[1].onClick.AddListener(() => playerinventory.sellProduce(1));
+        produceButtons[2].onClick.AddListener(() => playerinventory.sellProduce(2));
+        produceButtons[3].onClick.AddListener(() => playerinventory.sellProduce(3));
+        produceButtons[4].onClick.AddListener(() => playerinventory.sellProduce(4));
+        produceButtons[5].onClick.AddListener(() => playerinventory.sellProduce(5));
     }
 
     // Update is called once per frame
@@ -54,6 +68,8 @@ public class canvasController : MonoBehaviour
             produceCanvas.SetActive(true);
             seedsCanvas.SetActive(false);
             playercontroller.canDoStuff = false;
+            //interactableProduce(); //remember to make sure they can click the produce buttons
+            //this should've been called from the interaction controller, hrmm
         } else
         {
             hideProduce();
@@ -100,6 +116,7 @@ public class canvasController : MonoBehaviour
     }
     public void interactableProduce()
     {
+        Debug.Log("Interactable Produce called");
         foreach (Button button in produceButtons)
         {
             button.interactable = true;

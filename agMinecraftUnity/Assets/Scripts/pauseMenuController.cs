@@ -39,6 +39,7 @@ public class pauseMenuController : MonoBehaviour
     }
     public void resume()
     {
+        pauseCanvas.SetActive(false);
         Time.timeScale = 1f;
     }
 }
