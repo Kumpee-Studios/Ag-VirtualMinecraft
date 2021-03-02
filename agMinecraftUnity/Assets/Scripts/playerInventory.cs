@@ -82,14 +82,14 @@ public class playerInventory : MonoBehaviour
         UnityEngine.Vector3 result = new UnityEngine.Vector3(float.Parse(numbers[0].Substring(1, numbers[0].Length - 1)), float.Parse(numbers[1]), float.Parse(numbers[2].Substring(0, numbers[2].Length - 1)));
         return result;
     }
-    public void sellProduce(int plant)
-    {
-        Debug.Log("This is the plant variable: " + plant);
-        Debug.Log("Produce array of plant: " + produceArray[plant]);
-        if (produceArray[plant] > 0)
+    public void sellProduce(int plant) //I like to think this is self documenting selling code, just in case
+    {   //in case something explodes just un comment these
+        //Debug.Log("This is the plant variable: " + plant);
+        //Debug.Log("Produce array of plant: " + produceArray[plant]);
+        if (produceArray[plant] > 0) //checks that they have produce to sell
         {
-            produceArray[plant] -= 1;
-            switch (plant)
+            produceArray[plant] -= 1; //reduces produce by 1
+            switch (plant) //adds money depending on what plant they sold
             {
                 case 0:
                     money += 5;
@@ -110,10 +110,10 @@ public class playerInventory : MonoBehaviour
                     money += 4;
                     break;
             }
-            moneyText.text = moneyText.text.TrimEnd(numbers) + money;
+            moneyText.text = moneyText.text.TrimEnd(numbers) + money; //updates money text
             produceText[plant].text = produceText[plant].text.TrimEnd(numbers) + produceArray[plant];
             if(money >= 10) //10 for testing purposes, adjust as needed
-            {
+            { //if they've reached a milestone it will take them to the level up screen
                 //implement end game stuff here
                 saveInfo();
                 SceneManager.LoadSceneAsync("LevelUp");
@@ -126,8 +126,8 @@ public class playerInventory : MonoBehaviour
         {
             seedArray[plant] += 1; //adding seed to inventory and updating text
             seedText[plant].text = seedText[plant].text.TrimEnd(numbers) + seedArray[plant];
-            money -= 2;
-            moneyText.text = moneyText.text.TrimEnd(numbers) + money;
+            money -= 2; //removing money
+            moneyText.text = moneyText.text.TrimEnd(numbers) + money; //updating money text
         }
     }
     public void saveInfo() //saves player information
@@ -145,13 +145,17 @@ public class playerInventory : MonoBehaviour
             InteractionController.inTown = stats.town;
             Vector3 playerPosition = new Vector3(stats.position[0], stats.position[1], stats.position[2]);
             GameObject.FindGameObjectWithTag("Player").gameObject.transform.position = playerPosition;
+            int index = 0;
             foreach (int num in seedArray) //setting all seeds to where they should be
             {
-                seedText[num].text = seedText[num].text.TrimEnd(numbers) + seedArray[num]; //removing number of seeds from both seeds and produce, then adding new number to end of string
+                seedText[index].text = seedText[index].text.TrimEnd(numbers) + seedArray[index]; //removing number of seeds from both seeds and produce, then adding new number to end of string
+                index++;
             }
+            index = 0;
             foreach (int num in produceArray) //adjusting produce text
             {
-                produceText[num].text = produceText[num].text.TrimEnd(numbers) + produceArray[num];
+                produceText[index].text = produceText[index].text.TrimEnd(numbers) + produceArray[index];
+                index++;
             }
             moneyText.text = moneyText.text.TrimEnd(numbers) + money;
         }
