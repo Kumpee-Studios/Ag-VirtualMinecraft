@@ -7,12 +7,17 @@ public class canvasController : MonoBehaviour
 {
     public GameObject pauseCanvas;
     public GameObject seedsCanvas;
+    public GameObject cityCanvas;
     public Button[] seedButtons = new Button[6];
     public GameObject produceCanvas;
     public Button[] produceButtons = new Button[6];
     public GameObject buySeedsCanvas;
     public playerController playercontroller;
     public playerInventory playerinventory;
+    public GameObject seedsButton;
+    public GameObject produceButton;
+    public GameObject siloCanvas;
+    [SerializeField] private npcSpawner spawner;
     // Start is called before the first frame update
     void Start()
     {
@@ -63,24 +68,25 @@ public class canvasController : MonoBehaviour
     }
     public void showProduce()
     {
-        if (produceCanvas.activeSelf== false)
+        /*if (produceCanvas.activeSelf== false)
         {
             produceCanvas.SetActive(true);
             seedsCanvas.SetActive(false);
             playercontroller.canDoStuff = false;
             //interactableProduce(); //remember to make sure they can click the produce buttons
-            //this should've been called from the interaction controller, hrmm
         } else
         {
             hideProduce();
-        }
+        }*/
+        produceCanvas.SetActive(true);
+        siloCanvas.SetActive(false);
+        interactableProduce(); //I'll need to adjust this later to determine whether htye're at the city or not
+        //just use an 'at city' boolean or something similar
     }
     public void showSeedSeller()
     {
-        hideSeeds(); //making sure they don't have any other tabs open
-        hideProduce();
         buySeedsCanvas.SetActive(true);
-        playercontroller.canDoStuff = false;
+        siloCanvas.SetActive(false);
     }
     public void hideSeeds() //splitting these methods up so that I can use them here and call them whenever an item is selected from one of these menus
     {
@@ -116,7 +122,6 @@ public class canvasController : MonoBehaviour
     }
     public void interactableProduce()
     {
-        Debug.Log("Interactable Produce called");
         foreach (Button button in produceButtons)
         {
             button.interactable = true;
@@ -128,5 +133,61 @@ public class canvasController : MonoBehaviour
         {
             button.interactable = false;
         }
+    }
+    public void goToCity()
+    {
+        seedsButton.gameObject.SetActive(false); //deactivating pause menu buttons in upper left hand side of screen
+        produceButton.gameObject.SetActive(false);
+        StartCoroutine(cityMenu(true));
+    }    
+    public void returnFromCity()
+    {
+        cityCanvas.SetActive(false);
+        StartCoroutine(cityMenu(false));
+    }
+    private IEnumerator cityMenu(bool toCity)
+    {
+        yield return new WaitForSeconds(4f); //same amount of time it takes to drive the car to or from the city
+        if (toCity)
+        {
+            cityCanvas.SetActive(true); //...so...this should hypothetically flip it on and off
+        }
+        else
+        {
+            seedsButton.gameObject.SetActive(true); //deactivating pause menu buttons in upper left hand side of screen
+            produceButton.gameObject.SetActive(true);
+        }
+    }
+    public void goMarket() //method to adjust camera to show market scene
+    {
+        playercontroller.gameObject.transform.position = new Vector3(playercontroller.gameObject.transform.position.x - 40f, playercontroller.gameObject.transform.position.y, -10);
+        cityCanvas.SetActive(false);
+        spawner.spawnNPCS();
+        StartCoroutine(returnFromMarket());
+    }
+    public void goSilo() //emthod to adjust camera to show silo scene
+    {
+        playercontroller.gameObject.transform.position = new Vector3(playercontroller.gameObject.transform.position.x + 35f, playercontroller.gameObject.transform.position.y, -10);
+        cityCanvas.SetActive(false);
+        siloCanvas.SetActive(true);
+    }
+    public void returnCity() //only needs to be called from the silo screen
+    { //returns player from silo and moves view to city
+        playercontroller.gameObject.transform.position = new Vector3(playercontroller.gameObject.transform.position.x - 35f, playercontroller.gameObject.transform.position.y, -10);
+        cityCanvas.SetActive(true);
+        siloCanvas.SetActive(false);
+    }
+    public void returnSilo() //don't want it to shift the camera again so creating method to show silo menu after they buy seeds/sell produce
+    {
+        siloCanvas.SetActive(true);
+        buySeedsCanvas.SetActive(false);
+        produceCanvas.SetActive(false);
+        uninteractableProduce();
+    }
+    private IEnumerator returnFromMarket()
+    {
+        yield return new WaitForSeconds(30f); //max time would be 40, seems unlikely
+        playercontroller.gameObject.transform.position = new Vector3(playercontroller.gameObject.transform.position.x + 40f, playercontroller.gameObject.transform.position.y, -10);
+        cityCanvas.SetActive(true);
     }
 }

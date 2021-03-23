@@ -20,7 +20,7 @@ public class playerInventory : MonoBehaviour
     [Tooltip("Alphabetical order, bean, carrot, corn, soybean, squash, sugarbeet. Please don't change unless you like making a hard time for yourself.")]
     public GameObject[] plantArray = new GameObject[6]; //in order of prefabs alphabetically: bean, carrot, corn, soybean, squash, sugarbeet
     public List<string> stringCoords = new List<string>();
-    private char[] numbers = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9' }; //just so you don't have to create an array every time you update produce ect.
+    public char[] numbers = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9' }; //just so you don't have to create an array every time you update produce ect.
 
     // Start is called before the first frame update
     void Start()
@@ -92,22 +92,22 @@ public class playerInventory : MonoBehaviour
             switch (plant) //adds money depending on what plant they sold
             {
                 case 0:
-                    money += 5;
+                    money += 2;
                     break;
                 case 1:
-                    money += 3;
+                    money += 2;
                     break;
                 case 2:
-                    money += 4;
+                    money += 2;
                     break;
                 case 3:
-                    money += 6;
+                    money += 2;
                     break;
                 case 4:
-                    money += 3;
+                    money += 2;
                     break;
                 case 5:
-                    money += 4;
+                    money += 2;
                     break;
             }
             moneyText.text = moneyText.text.TrimEnd(numbers) + money; //updates money text
