@@ -22,6 +22,7 @@ public class PlayerMinigame : MonoBehaviour
         {
             moveDown();
         }
+        transform.position += new UnityEngine.Vector3(0, -speed * Time.deltaTime * 0.25f , 0);
 
 
 
