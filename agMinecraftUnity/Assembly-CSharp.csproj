@@ -67,6 +67,8 @@
     <Compile Include="Assets\Scripts\pauseMenuController.cs" />
     <Compile Include="Assets\Scripts\SavingScripts\saveInformation.cs" />
     <Compile Include="Assets\Scripts\menuManager.cs" />
+    <Compile Include="Assets\Scenes\Minigame1\Scripts\ObstacleSpaawnNScroll.cs" />
+    <Compile Include="Assets\Scenes\Minigame1\Scripts\ObjectCollision.cs" />
     <Compile Include="Assets\Scripts\NPCControllerTest.cs" />
     <Compile Include="Assets\Scripts\teleportPlayer.cs" />
     <Compile Include="Assets\Scripts\interactionController.cs" />
@@ -77,8 +79,8 @@
     <Compile Include="Assets\Scripts\TextMeshProGUI.cs" />
     <Compile Include="Assets\Scripts\bigFarmCanvasManager.cs" />
     <Compile Include="Assets\Scripts\levelUpController.cs" />
-    <Compile Include="Assets\Scenes\Minigame1\Scripts\ObstacleSpaawnNScroll.cs" />
-    <Compile Include="Assets\Scenes\Minigame1\Scripts\ObjectCollision.cs" />
+    <Compile Include="Assets\Scenes\Minigame1\Scripts\gameOverScript.cs" />
+    <Compile Include="Assets\Scenes\Minigame1\Scripts\ObstacleSpawner.cs" />
   </ItemGroup>
   <ItemGroup>
      <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
