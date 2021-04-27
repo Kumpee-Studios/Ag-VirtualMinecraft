@@ -8,6 +8,7 @@ public class backgroundScrollScript : MonoBehaviour
 {
     public TextMeshProUGUI score;
     public TextMeshProUGUI fuel;
+    public TextMeshProUGUI gameOver;
     // Start is called before the first frame update
     void Start()
     {
@@ -17,7 +18,7 @@ public class backgroundScrollScript : MonoBehaviour
     // Update is called once per frame
     private float time = 0f;
     private float scoreTime = 0f;
-    private float fuelCount = 10f;
+    public float fuelCount = 25f;
     void Update()
     {
         this.transform.Translate(new Vector3(-10f,0,0)*Time.deltaTime, Space.World);
@@ -35,5 +36,16 @@ public class backgroundScrollScript : MonoBehaviour
         //Controls the score counter. Why it's here with the background...Well, the counter is in the background, I guess
         score.text = "Score: " + (Math.Floor(scoreTime) * 100).ToString();
         fuel.text = "Fuel: " + Math.Floor(fuelCount).ToString();
+
+        if (fuelCount < 1) {
+
+            gameOverCondition();
+            //If Fuel is below zero, game over.
+            Time.timeScale = 0;
+        }
     }
+    public void gameOverCondition() {
+        gameOver.gameObject.SetActive(true);
+    }
+
 }

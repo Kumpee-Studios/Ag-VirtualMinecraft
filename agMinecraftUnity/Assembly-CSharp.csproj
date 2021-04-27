@@ -57,6 +57,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\followPlayer.cs" />
+    <Compile Include="Assets\Scenes\Minigame1\Scripts\ObstacleSpawner.cs" />
     <Compile Include="Assets\Scripts\NPCTextBox.cs" />
     <Compile Include="Assets\Scripts\canvasController.cs" />
     <Compile Include="Assets\Scripts\timerBarController.cs" />
@@ -65,6 +66,7 @@
     <Compile Include="Assets\Scripts\playerInventory.cs" />
     <Compile Include="Assets\Scripts\SavingScripts\saveSystem.cs" />
     <Compile Include="Assets\Scripts\pauseMenuController.cs" />
+    <Compile Include="Assets\Scenes\Minigame1\Scripts\gameOverScript.cs" />
     <Compile Include="Assets\Scripts\SavingScripts\saveInformation.cs" />
     <Compile Include="Assets\Scripts\menuManager.cs" />
     <Compile Include="Assets\Scenes\Minigame1\Scripts\ObstacleSpaawnNScroll.cs" />
@@ -79,8 +81,7 @@
     <Compile Include="Assets\Scripts\TextMeshProGUI.cs" />
     <Compile Include="Assets\Scripts\bigFarmCanvasManager.cs" />
     <Compile Include="Assets\Scripts\levelUpController.cs" />
-    <Compile Include="Assets\Scenes\Minigame1\Scripts\gameOverScript.cs" />
-    <Compile Include="Assets\Scenes\Minigame1\Scripts\ObstacleSpawner.cs" />
+    <Compile Include="Assets\Scenes\Minigame1\Scripts\fuelPickupScript.cs" />
   </ItemGroup>
   <ItemGroup>
      <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

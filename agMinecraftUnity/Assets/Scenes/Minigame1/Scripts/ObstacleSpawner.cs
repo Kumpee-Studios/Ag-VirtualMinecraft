@@ -21,7 +21,7 @@ public class ObstacleSpawner : MonoBehaviour
         {
             time = 0f;
             Instantiate(Obstacle);
-            //For good looping, take farthest x coordinate and divide by time.
+            //For good looping, take farthest x coordinate background reaches and divide by time.
         }
     }
 }
