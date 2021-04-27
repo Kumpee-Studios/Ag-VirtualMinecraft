@@ -10,6 +10,7 @@ public class playerInventory : MonoBehaviour
     public TextMeshProUGUI moneyText;
     public canvasController CanvasController;
     public playerController PlayerController;
+    public followPlayer follow;
     [SerializeField] interactionController InteractionController; //using this sovlely for saving
     //need 6 ints to hold number of each seed, array might be better
     public int[] seedArray = new int[6]; //values of number of seeds they have and text to display them in inventory
@@ -25,12 +26,7 @@ public class playerInventory : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //remove this later, I need to be able to plant seeds right now
-        for (int number = 0; number < seedArray.Length; number++)
-        {
-            seedArray[number] = 3; //just trying to set all values of seeds to 5 to make sure I test each one
-        }
-        loadInfo(); //calling this after setting all seeds to 3. If they haven't played before it should return null and give them 3 seeds of each
+        loadInfo(); //Loading Player Information
     }
 
     // Update is called once per frame
@@ -56,6 +52,7 @@ public class playerInventory : MonoBehaviour
             Instantiate(plantArray[plant], (StringVector(hoeTile.ToString()) + new UnityEngine.Vector3(0.5f, 0.5f, 0f)), UnityEngine.Quaternion.Euler(0, 0, 0)); //changing name to carrotTile
             seedArray[plant] -= 1; //deleting the numbers from end of string using TrimEnd to remove number and then concatenating the new number of seeds left
             seedText[plant].text = seedText[plant].text.TrimEnd(numbers) + seedArray[plant];
+            Debug.Log("Should've edited text by now.");
             PlayerController.seedMenu = false; //don't forget like I did to set the bool to false for the poor player
             PlayerController.canDoStuff = true; //I thought the moveAgain method would work, maybe I adjusted the wrong bool...
         }
@@ -112,12 +109,7 @@ public class playerInventory : MonoBehaviour
             }
             moneyText.text = moneyText.text.TrimEnd(numbers) + money; //updates money text
             produceText[plant].text = produceText[plant].text.TrimEnd(numbers) + produceArray[plant];
-            if(money >= 10) //10 for testing purposes, adjust as needed
-            { //if they've reached a milestone it will take them to the level up screen
-                //implement end game stuff here
-                saveInfo();
-                SceneManager.LoadSceneAsync("LevelUp");
-            }
+            canEnd();
         }
     }
     public void buyPlant(int plant)
@@ -132,13 +124,17 @@ public class playerInventory : MonoBehaviour
     }
     public void saveInfo() //saves player information
     {
-        saveSystem.savePlayer(PlayerController, this, InteractionController); ;
+        saveSystem.savePlayer(GameObject.FindGameObjectWithTag("MainCamera").GetComponent<followPlayer>(), PlayerController, this, InteractionController); ;
     }
     public void loadInfo() //unpacks player info and sets various variables equal to what they should be
     {
         saveInformation stats = saveSystem.loadData();
         if (stats != null) //make sure they HAVE a save file or you can break the game if you want
         {
+            if (follow != null)
+            {
+                follow.isMale = stats.male;
+            }
             seedArray = stats.seeds;
             produceArray = stats.produce;
             money = stats.money;
@@ -148,16 +144,48 @@ public class playerInventory : MonoBehaviour
             int index = 0;
             foreach (int num in seedArray) //setting all seeds to where they should be
             {
-                seedText[index].text = seedText[index].text.TrimEnd(numbers) + seedArray[index]; //removing number of seeds from both seeds and produce, then adding new number to end of string
-                index++;
+                if (seedText[index] != null)
+                {
+                    seedText[index].text = seedText[index].text.TrimEnd(numbers) + seedArray[index]; //removing number of seeds from both seeds and produce, then adding new number to end of string
+                    index++;
+                }
             }
             index = 0;
             foreach (int num in produceArray) //adjusting produce text
             {
-                produceText[index].text = produceText[index].text.TrimEnd(numbers) + produceArray[index];
-                index++;
+                if (produceText[index] != null)
+                {
+                    produceText[index].text = produceText[index].text.TrimEnd(numbers) + produceArray[index];
+                    index++;
+                }
             }
-            moneyText.text = moneyText.text.TrimEnd(numbers) + money;
+            if (moneyText != null)
+            {
+                moneyText.text = moneyText.text.TrimEnd(numbers) + money;
+            }
+        }
+        else //I had this, and then I removed it for no reason, don't get rid of this. If the user is a new player it gives them 3 seeds a piece
+        {
+            for (int i = 0; i < seedArray.Length; i++)
+            {
+                seedArray[i] = 3;
+            }
+            foreach (int num in seedArray) //setting all seeds to where they should be
+            {
+                int index = 0;
+                if (seedText[index] != null)
+                {
+                    seedText[index].text = seedText[index].text.TrimEnd(numbers) + seedArray[index]; //removing number of seeds from both seeds and produce, then adding new number to end of string
+                    index++;
+                }
+            }
+        }
+    }
+    public void canEnd()
+    {
+        if (money >= 10) //10 for testing purposes, adjust as needed
+        { //if they've reached a milestone it will take them to the level up screen
+            CanvasController.canEnd = true;
         }
     }
 }

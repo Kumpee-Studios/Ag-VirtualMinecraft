@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class endGameController : MonoBehaviour
@@ -35,5 +36,9 @@ public class endGameController : MonoBehaviour
             nextArrow.gameObject.SetActive(false);
             mainMenu.gameObject.SetActive(true);
         }
+    }
+    public void returnToTitle()
+    {
+        SceneManager.LoadSceneAsync("MainMenu");
     }
 }

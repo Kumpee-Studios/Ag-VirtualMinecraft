@@ -4,13 +4,12 @@ using UnityEngine;
 
 public static class saveSystem
 {
-    public static void savePlayer(playerController controller, playerInventory inventory, interactionController interaction)
+    public static void savePlayer(followPlayer camera, playerController controller, playerInventory inventory, interactionController interaction)
     {
         BinaryFormatter formatter = new BinaryFormatter();
         string path = Application.persistentDataPath + "/player.info"; //creating path and filename, extension doesn't matter, persistent path is universal across OS
         FileStream stream = new FileStream(path, FileMode.Create); //creates file at path given
-
-        saveInformation information = new saveInformation(controller, inventory, interaction); //creating the save information
+        saveInformation information = new saveInformation(camera, controller, inventory, interaction); //creating the save information
 
         formatter.Serialize(stream, information); //turning information into binary
         stream.Close();
@@ -35,11 +34,19 @@ public static class saveSystem
                 return null;
             }
         }
-        else
+        else //temp solution: bundle project with file included that has starting position and seed count etc
         { //if it doesn't exist or it's their first time playing, might have to adjust this later
             Debug.LogError("Save file not found");
             return null;
         }
 
+    }
+    public static void deleteData()
+    {
+        string path = Application.persistentDataPath + "/player.info"; //referencing path and filename for deletion
+        if (File.Exists(path)) //assuming this will throw nasty error if not caught
+        { //check file exists, if it does delete it. Means they either started new game or are playing for first time
+            File.Delete(path);
+        }
     }
 }

@@ -16,7 +16,7 @@ public class pauseMenuController : MonoBehaviour
     }
     // Update is called once per frame
     void Update()
-    {
+    { //add check for if they are in town
         if(Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.P))
         {
                 pauseCanvas.SetActive(false);

@@ -32,7 +32,14 @@ public class menuManager : MonoBehaviour
     }
     private void goToBackyard()
     {
-        SceneManager.LoadSceneAsync("Backyard");
+        if (saveSystem.loadData() != null)
+        {
+            SceneManager.LoadSceneAsync("Backyard");
+        } //means they've played the game before
+        else
+        {
+            startNewGame();
+        }
     }
     private void goToManagement()
     {
@@ -54,6 +61,7 @@ public class menuManager : MonoBehaviour
     }
     private void startNewGame()
     {
+        saveSystem.deleteData();
         SceneManager.LoadSceneAsync("Intro");
     }
 }

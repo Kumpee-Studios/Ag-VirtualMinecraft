@@ -27,12 +27,6 @@ public class interactionController : MonoBehaviour
         interactbuttonPart.onClick.AddListener(handleInteraction);
         collisions = new GameObject[2]; //okay please leave this here, without it you'll get deliciously nasty index out of bounds exceptions
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
     private void OnTriggerEnter2D(Collider2D collision)
     {
      Debug.Log(collision.gameObject.tag); //leaving this here JUST in case
@@ -61,18 +55,6 @@ public class interactionController : MonoBehaviour
         {
             StartCoroutine(checkPlant());
         }   
-     else if(collision.gameObject.tag == "SeedSeller")
-        {
-            seedSeller = true;
-            interactButton.SetActive(true); //if you have it not twice, it shows the button but you can't interact with it
-            interactText.text = "Buy Seeds";
-        }
-    else if(collision.gameObject.tag == "ProduceBuyer")
-        {
-            produceBuyer = true;
-            interactButton.SetActive(true); //if you have it not twice, it shows the button but you can't interact with it
-            interactText.text = "Sell Produce";
-        }
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
@@ -144,6 +126,7 @@ public class interactionController : MonoBehaviour
     }
     public void flipTown() //using this in an attempt to prevent hoe-ing while in town or in the shed
     {
+        Debug.Log("Flip town called");
         inTown = !inTown;
     }
 }
