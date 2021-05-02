@@ -63,6 +63,8 @@
     <Compile Include="Assets\Scripts\timerBarController.cs" />
     <Compile Include="Assets\Scenes\Minigame1\Scripts\backgroundScrollScript.cs" />
     <Compile Include="Assets\Scripts\playerController.cs" />
+    <Compile Include="Assets\Scenes\Minigame1\Scripts\cornSpawner.cs" />
+    <Compile Include="Assets\Scenes\Minigame1\Scripts\scorePickupScript.cs" />
     <Compile Include="Assets\Scripts\playerInventory.cs" />
     <Compile Include="Assets\Scripts\SavingScripts\saveSystem.cs" />
     <Compile Include="Assets\Scripts\pauseMenuController.cs" />
@@ -70,7 +72,7 @@
     <Compile Include="Assets\Scripts\SavingScripts\saveInformation.cs" />
     <Compile Include="Assets\Scripts\menuManager.cs" />
     <Compile Include="Assets\Scenes\Minigame1\Scripts\ObstacleSpaawnNScroll.cs" />
-    <Compile Include="Assets\Scenes\Minigame1\Scripts\ObjectCollision.cs" />
+    <Compile Include="Assets\Scenes\Minigame1\Scripts\fuelPickupScript.cs" />
     <Compile Include="Assets\Scripts\NPCControllerTest.cs" />
     <Compile Include="Assets\Scripts\teleportPlayer.cs" />
     <Compile Include="Assets\Scripts\interactionController.cs" />
@@ -79,9 +81,9 @@
     <Compile Include="Assets\Scenes\Minigame1\Scripts\PlayerMinigame.cs" />
     <Compile Include="Assets\Scenes\Minigame1\Scripts\GameHandler.cs" />
     <Compile Include="Assets\Scripts\TextMeshProGUI.cs" />
+    <Compile Include="Assets\Scenes\Minigame1\Scripts\cornGraze.cs" />
     <Compile Include="Assets\Scripts\bigFarmCanvasManager.cs" />
     <Compile Include="Assets\Scripts\levelUpController.cs" />
-    <Compile Include="Assets\Scenes\Minigame1\Scripts\fuelPickupScript.cs" />
   </ItemGroup>
   <ItemGroup>
      <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

@@ -17,7 +17,7 @@ public class backgroundScrollScript : MonoBehaviour
 
     // Update is called once per frame
     private float time = 0f;
-    private float scoreTime = 0f;
+    public float scoreTime = 0f;
     public float fuelCount = 25f;
     void Update()
     {
@@ -47,5 +47,6 @@ public class backgroundScrollScript : MonoBehaviour
     public void gameOverCondition() {
         gameOver.gameObject.SetActive(true);
     }
+
 
 }

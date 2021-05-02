@@ -1,10 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class PlayerMinigame : MonoBehaviour
 {
     public float speed = 10;
+    public TextMeshProUGUI gameOver;
     private Vector2 targetPosition;
     void Start()
     {
@@ -34,5 +36,18 @@ public class PlayerMinigame : MonoBehaviour
     private void moveDown()
     {
         transform.position += new UnityEngine.Vector3(0, -speed * Time.deltaTime, 0);
+    }
+    public void gameOverCondition()
+    {
+        gameOver.gameObject.SetActive(true);
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Obstacle")
+        {
+            Time.timeScale = 0;
+            gameOverCondition();
+        }
     }
 }

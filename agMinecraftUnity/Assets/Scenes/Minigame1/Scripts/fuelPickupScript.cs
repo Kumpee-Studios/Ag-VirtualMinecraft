@@ -11,7 +11,7 @@ public class fuelPickupScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        fuelCounter = GameObject.FindGameObjectWithTag("Dirt").GetComponent<backgroundScrollScript>();
     }
 
     // Update is called once per frame
@@ -19,12 +19,11 @@ public class fuelPickupScript : MonoBehaviour
     {
         
     }
-    private float fuelPickup = 25f;
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.tag == "Player")
         {
-            fuelCounter.fuelCount += 25;
+            fuelCounter.fuelCount += 50;
             Destroy(this.gameObject);
         }
     }

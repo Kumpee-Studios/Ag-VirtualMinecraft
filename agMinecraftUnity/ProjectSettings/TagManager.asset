@@ -9,6 +9,7 @@ TagManager:
   - Plant
   - SeedSeller
   - ProduceBuyer
+  - Obstacle
   layers:
   - Default
   - TransparentFX
