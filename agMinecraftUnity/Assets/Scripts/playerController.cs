@@ -57,7 +57,7 @@ public class playerController : MonoBehaviour
                     if (!left)
                     {
                         left = !left; //the rotate brings the hoe point with it
-                        this.gameObject.transform.rotation = UnityEngine.Quaternion.Euler(0, 180, 0);
+                        this.gameObject.transform.rotation = UnityEngine.Quaternion.Euler(0, 0, 0);
                         hoePoint.gameObject.transform.position = this.gameObject.transform.position + new UnityEngine.Vector3(-1f, 0, 0); //since I'm rotating the sprite this just has to be 0
 
                     }
@@ -68,7 +68,7 @@ public class playerController : MonoBehaviour
                     if (left)
                     {
                         left = !left;
-                        this.gameObject.transform.rotation = UnityEngine.Quaternion.Euler(0, 0, 0);
+                        this.gameObject.transform.rotation = UnityEngine.Quaternion.Euler(0, 180, 0);
                         hoePoint.gameObject.transform.position = this.gameObject.transform.position + new UnityEngine.Vector3(1f, 0, 0); //since I'm rotating the sprite this just has to be 0
                     }
                 moveRight();

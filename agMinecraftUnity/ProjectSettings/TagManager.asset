@@ -9,7 +9,9 @@ TagManager:
   - Plant
   - SeedSeller
   - ProduceBuyer
-  - Obstacle
+  - male
+  - female
+  - hoe
   layers:
   - Default
   - TransparentFX

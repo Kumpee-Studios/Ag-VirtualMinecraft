@@ -6,15 +6,23 @@ using UnityEngine.UI;
 
 public class menuManager : MonoBehaviour
 {
+    public GameObject choices;
     public Button backyard;
     public Button management;
     public Button quit;
+    public GameObject options;
+    public Button newGame;
+    public Button continueGame;
+    public Button menuBack;
     // Start is called before the first frame update
     void Start()
     {
-        backyard.onClick.AddListener(goToBackyard);
+        backyard.onClick.AddListener(openOptions);
         management.onClick.AddListener(goToManagement);
-        management.onClick.AddListener(quitGame);
+        quit.onClick.AddListener(quitGame);
+        newGame.onClick.AddListener(startNewGame);
+        continueGame.onClick.AddListener(goToBackyard);
+        menuBack.onClick.AddListener(mainMenu);
     }
 
     // Update is called once per frame
@@ -24,7 +32,14 @@ public class menuManager : MonoBehaviour
     }
     private void goToBackyard()
     {
-        SceneManager.LoadSceneAsync("Backyard");
+        if (saveSystem.loadData() != null)
+        {
+            SceneManager.LoadSceneAsync("Backyard");
+        } //means they've played the game before
+        else
+        {
+            startNewGame();
+        }
     }
     private void goToManagement()
     {
@@ -33,5 +48,20 @@ public class menuManager : MonoBehaviour
     private void quitGame()
     {
         Application.Quit();
+    }
+    private void mainMenu()
+    {
+        options.gameObject.SetActive(false);
+        choices.gameObject.SetActive(true);
+    }
+    private void openOptions()
+    {
+        options.gameObject.SetActive(true);
+        choices.gameObject.SetActive(false);
+    }
+    private void startNewGame()
+    {
+        saveSystem.deleteData();
+        SceneManager.LoadSceneAsync("Intro");
     }
 }
