@@ -39,6 +39,6 @@ public class endGameController : MonoBehaviour
     }
     public void returnToTitle()
     {
-        SceneManager.LoadSceneAsync("MainMenu");
+        SceneManager.LoadSceneAsync("Minigame1");
     }
 }

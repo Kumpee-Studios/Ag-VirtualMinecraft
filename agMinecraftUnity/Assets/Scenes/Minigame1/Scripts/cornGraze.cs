@@ -6,7 +6,7 @@ using System;
 
 public class cornGraze : MonoBehaviour
 {
-    public backgroundScrollScript scoreTime;
+    //public backgroundScrollScript scoreTime;
 
     // Start is called before the first frame update
     void Start()
@@ -24,7 +24,7 @@ public class cornGraze : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player")
         {
-            scoreTime.scoreTime += 25;
+            //scoreTime.scoreTime += 25;
             
         }
     }

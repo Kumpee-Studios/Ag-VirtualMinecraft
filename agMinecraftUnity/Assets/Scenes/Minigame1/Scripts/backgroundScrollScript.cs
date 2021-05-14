@@ -8,7 +8,7 @@ public class backgroundScrollScript : MonoBehaviour
 {
     public TextMeshProUGUI score;
     public TextMeshProUGUI fuel;
-    public TextMeshProUGUI gameOver;
+    public TextMeshProUGUI gameOverScoreText;
     // Start is called before the first frame update
     void Start()
     {
@@ -45,7 +45,7 @@ public class backgroundScrollScript : MonoBehaviour
         }
     }
     public void gameOverCondition() {
-        gameOver.gameObject.SetActive(true);
+        gameOverScoreText.text = "Final Score: " + (Math.Floor(scoreTime) * 100).ToString();
     }
 
 

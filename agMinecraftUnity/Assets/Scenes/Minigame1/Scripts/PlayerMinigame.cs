@@ -2,15 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerMinigame : MonoBehaviour
 {
     public float speed = 10;
-    public TextMeshProUGUI gameOver;
+    public GameObject gameOverCanvas;
+    public backgroundScrollScript scroller;
     private Vector2 targetPosition;
     void Start()
     {
-
         targetPosition = new Vector2(0.0f, 0.0f);
     }
 
@@ -39,7 +40,8 @@ public class PlayerMinigame : MonoBehaviour
     }
     public void gameOverCondition()
     {
-        gameOver.gameObject.SetActive(true);
+        gameOverCanvas.gameObject.SetActive(true);
+        scroller.gameOverCondition();
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -49,5 +51,14 @@ public class PlayerMinigame : MonoBehaviour
             Time.timeScale = 0;
             gameOverCondition();
         }
+    }
+    public void MainMenu()
+    {
+        SceneManager.LoadSceneAsync("MainMenu");
+    }
+
+    public void Replay()
+    {
+        SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().name);
     }
 }

@@ -12,6 +12,8 @@ TagManager:
   - male
   - female
   - hoe
+  - Obstacle
+  - ScoreText
   layers:
   - Default
   - TransparentFX

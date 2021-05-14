@@ -28,6 +28,7 @@ public class canvasController : MonoBehaviour
     void Start()
     {
         StartCoroutine(setUpGame());
+        hoe = GameObject.FindGameObjectWithTag("hoe").GetComponent<interactionController>();
     }
 
     // Update is called once per frame
@@ -42,7 +43,7 @@ public class canvasController : MonoBehaviour
                     hideProduce();
                     hideSeedSeller();
                 }
-            else if ((Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.P)) && !pauseCanvas.activeInHierarchy)
+            else if ((Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.P)) && !pauseCanvas.activeInHierarchy && !hoe.inTown)
             {
                 pauseCanvas.SetActive(true);
                 Time.timeScale = 0f;
@@ -69,7 +70,6 @@ public class canvasController : MonoBehaviour
             if (hoe.inTown)
             {
                 interactableProduce(); //I'll need to adjust this later to determine whether htye're at the city or not
-                                       //just use an 'at city' boolean or something similar
             }
         } else
         {
@@ -147,11 +147,14 @@ public class canvasController : MonoBehaviour
     }
     private IEnumerator cityMenu(bool toCity)
     {
+        if(toCity) //adding this before the wait to ensure the player cannot pause the game WHILE driving to town or back from town
+        {
+            hoe.inTown = true;
+        }
         yield return new WaitForSeconds(4f); //same amount of time it takes to drive the car to or from the city
         if (toCity)
         {
             cityCanvas.SetActive(true); //...so...this should hypothetically flip it on and off
-            hoe.inTown = true;
         }
         else
         {

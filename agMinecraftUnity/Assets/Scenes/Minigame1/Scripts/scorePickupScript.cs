@@ -11,7 +11,7 @@ public class scorePickupScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        scorePower = GameObject.FindGameObjectWithTag("Dirt").GetComponent<backgroundScrollScript>();
     }
 
     // Update is called once per frame

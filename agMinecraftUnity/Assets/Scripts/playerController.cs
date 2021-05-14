@@ -32,7 +32,7 @@ public class playerController : MonoBehaviour
     {
         if (canDoStuff)
         {
-                if (Input.GetKey(KeyCode.W))
+                if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow))
                 {
                     if (down) //work in progress, will probably just wind up using sprite anims...not sure. Will need spritesheet first
                     {
@@ -42,7 +42,7 @@ public class playerController : MonoBehaviour
                     }
                     moveUp();
                 }
-                if (Input.GetKey(KeyCode.S))
+                if (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow))
                 {
                     if (!down) //see work in progress comment above on (currently) line 32
                     {
@@ -52,7 +52,7 @@ public class playerController : MonoBehaviour
                     }
                 moveDown();
                 }
-                if (Input.GetKey(KeyCode.A))
+                if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
                 {
                     if (!left)
                     {
@@ -63,7 +63,7 @@ public class playerController : MonoBehaviour
                     }
                     moveLeft();
                 }
-                if (Input.GetKey(KeyCode.D))
+                if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
                 {
                     if (left)
                     {

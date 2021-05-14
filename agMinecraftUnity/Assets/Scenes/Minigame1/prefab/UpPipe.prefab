@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 6334106916190014898}
   - component: {fileID: 6334106916190014908}
   - component: {fileID: 6334106916190014909}
-  - component: {fileID: 6334106916190014910}
   - component: {fileID: 6334106916190014911}
   m_Layer: 0
   m_Name: UpPipe
@@ -28,7 +27,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6334106916190014899}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 250, y: 47.5, z: 0}
+  m_LocalPosition: {x: 0, y: 47.5, z: 0}
   m_LocalScale: {x: 25, y: 50, z: 14.30115}
   m_Children: []
   m_Father: {fileID: 0}
@@ -111,18 +110,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.974808, y: 1.5910875}
   m_EdgeRadius: 0
---- !u!114 &6334106916190014910
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6334106916190014899}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 512483a293192584a9bbf996ba76d716, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &6334106916190014911
 MonoBehaviour:
   m_ObjectHideFlags: 0

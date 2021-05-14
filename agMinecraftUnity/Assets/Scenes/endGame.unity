@@ -180,7 +180,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Main Menu
+  m_text: Minigame
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -594,7 +594,7 @@ MonoBehaviour:
   words:
   - Leave us feedback and any comments on itch.io. We'd love to hear from you.
   - Let us know what you want to see in the next level. Feel free to replay the first
-    level if you want to.
+    level if you want to. For now, enjoy a minigame for completing level 1!
   mainMenu: {fileID: 1776171420}
   keepPlaying: {fileID: 1268228103}
   nextArrow: {fileID: 1264021124}

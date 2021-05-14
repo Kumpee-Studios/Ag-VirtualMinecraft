@@ -52,7 +52,6 @@ public class playerInventory : MonoBehaviour
             Instantiate(plantArray[plant], (StringVector(hoeTile.ToString()) + new UnityEngine.Vector3(0.5f, 0.5f, 0f)), UnityEngine.Quaternion.Euler(0, 0, 0)); //changing name to carrotTile
             seedArray[plant] -= 1; //deleting the numbers from end of string using TrimEnd to remove number and then concatenating the new number of seeds left
             seedText[plant].text = seedText[plant].text.TrimEnd(numbers) + seedArray[plant];
-            Debug.Log("Should've edited text by now.");
             PlayerController.seedMenu = false; //don't forget like I did to set the bool to false for the poor player
             PlayerController.canDoStuff = true; //I thought the moveAgain method would work, maybe I adjusted the wrong bool...
         }
@@ -183,7 +182,7 @@ public class playerInventory : MonoBehaviour
     }
     public void canEnd()
     {
-        if (money >= 10) //10 for testing purposes, adjust as needed
+        if (money >= 150) 
         { //if they've reached a milestone it will take them to the level up screen
             CanvasController.canEnd = true;
         }

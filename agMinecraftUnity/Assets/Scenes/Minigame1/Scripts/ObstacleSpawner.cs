@@ -19,12 +19,14 @@ public class ObstacleSpawner : MonoBehaviour
 
         time += Time.deltaTime;
  
-        if (time > 27.2f)
+        if (time > 10.2f)
         {
             time = 0f;
 
             Vector3 position = transform.position;
+            Debug.Log(position);
             position.y += Random.Range(-10f, 10f) * 1.5f;
+            position.x = 355f;
 
             Instantiate(obstacles[Random.Range(0, obstacles.Length)], position, gameObject.transform.rotation);
             //For good looping, take farthest x coordinate background reaches and divide by time.
